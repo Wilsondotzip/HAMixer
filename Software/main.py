@@ -1,11 +1,14 @@
 from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
 import serial
-s=serial.Serial('COM3')
-s.baudrate=9600
-s.bytesize=8
-s.parity='N'
-s.stopbits=1
-ids={1:'chrome.exe',2:'',3:'',4:''}
+import yaml
+with open('config.yaml','r') as e:
+    config=yaml.load(e,Loader=yaml.FullLoader)
+s=serial.Serial(config['comport'])
+s.baudrate=config['baudrate']
+s.bytesize=config['bytesize']
+s.parity=config['parity']
+s.stopbits=config['stopbits']
+ids=config['ids']
 idv={}
 for a in ids:
     temp={a:0}
