@@ -8,7 +8,7 @@ s.baudrate=config['baudrate']
 s.bytesize=config['bytesize']
 s.parity=config['parity']
 s.stopbits=config['stopbits']
-ids=config['ids']
+ids=config['IDs']
 idv={}
 for a in ids:
     temp={a:0}

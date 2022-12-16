@@ -1,0 +1,12 @@
+comport: 3
+IDs: ## You can add up to 4 (depending on how many control knobs you have). Top to bottom -> left to right on your HAM device 
+- chrome.exe
+- spotify.exe
+- discord.exe
+- vlc.exe
+
+baudrate: 9600 ## Must match firmware baudrate. 
+
+bytesize: 8
+parity:  N
+stopbits: 1
