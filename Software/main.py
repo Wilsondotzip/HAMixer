@@ -3,12 +3,17 @@ import serial
 import yaml
 with open('config.yaml','r') as e:
     config=yaml.load(e,Loader=yaml.FullLoader)
-s=serial.Serial(config['comport'])
+s=serial.Serial('COM'+str(config['comport']))
 s.baudrate=config['baudrate']
 s.bytesize=config['bytesize']
 s.parity=config['parity']
 s.stopbits=config['stopbits']
-ids=config['IDs']
+ie=0
+ids={}
+for a in config['IDs']:
+    ie=ie+1
+    temp={ie:a}
+    ids.update(temp)
 idv={}
 for a in ids:
     temp={a:0}
