@@ -3,7 +3,8 @@ import serial
 import yaml
 with open('config.yaml','r') as e:
     config=yaml.load(e,Loader=yaml.FullLoader)
-s=serial.Serial('COM'+str(config['comport']))
+serialport='COM'+str(config['comport'])
+s=serial.Serial(serialport)
 s.baudrate=config['baudrate']
 s.bytesize=config['bytesize']
 s.parity=config['parity']
@@ -14,6 +15,7 @@ for a in config['IDs']:
     ie=ie+1
     temp={ie:a}
     ids.update(temp)
+print(len(ids))
 idv={}
 for a in ids:
     temp={a:0}
@@ -27,12 +29,20 @@ def main():
         except:
             print('speed error')
             return main()
-        e[1]=int(e[1])
+        try:
+            e[1]=int(e[1])
+        except:
+            print('speed error part 2')
+            return main()
+        if e[1]>len(ids):
+            return main()
         if e[0]!=idv[e[1]]:
+            #print(e[0],idv[e[1]],'----------') debug
             idv[e[1]]=e[0]
             sessions = AudioUtilities.GetAllSessions()
             for session in sessions:
                 volume = session._ctl.QueryInterface(ISimpleAudioVolume)
                 if session.Process and session.Process.name() == ids[e[1]]:
-                    volume.SetMasterVolume(round(e[0]/100,2), None)
+                    #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
+                    volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
 main()
