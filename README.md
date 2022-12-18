@@ -26,7 +26,7 @@ A Python script runs in the background to turn the Arduino's serial inputs into 
 
 ## Requirements
 Currently only **Windows** is tested and supported to work. Adding Linux support is something high on our priority list.
-If you have windows you're all set nothing else is needed! Go grab the [compiled exe](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Software/HAM) and run it inside its own folder with the config file. 
+If you have windows you're all set nothing else is needed! Go grab the [compiled exe](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Software) and run it inside its own folder with the config file. 
 
 Alternativly you can use the [source code](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Software/Source) instead. 
 
