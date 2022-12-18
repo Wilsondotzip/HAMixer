@@ -18,6 +18,8 @@ int valC = 0;
 
 void setup() {
   // put your setup code here, to run once:
+
+  
   Serial.begin(9600); 
   bindToSoftware(pot1);
   bindToSoftware(pot2);
@@ -29,7 +31,8 @@ void setup() {
 void loop() {
 pot1Val = checkForUpdate(pot1, pot1Val, 1);
 pot2Val = checkForUpdate(pot2, pot2Val, 2);
-
+pot3Val = checkForUpdate(pot3, pot3Val, 3);
+pot4Val = checkForUpdate(pot4, pot4Val, 4);
 
   
 
@@ -51,7 +54,7 @@ int readAv(char pin){
   int sval = 0;
 
   for (i = 0; i < 5; i++){
-    sval = sval + map(analogRead(pin), 0, 1023, 100, 0);
+    sval = sval + map(analogRead(pin), 0, 1023, 0, 100);
     delay(1);
   }
   sval = sval / 5; 
@@ -60,7 +63,7 @@ int readAv(char pin){
 }
   
 char bindToSoftware(char pin){
-  InitialValue = map(analogRead(pin), 0, 1023, 100, 0);
+  InitialValue = map(analogRead(pin), 0, 1023, 0, 100);
   Serial.print(InitialValue);
   Serial.print("@1");
   Serial.print("\n");
