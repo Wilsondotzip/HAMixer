@@ -10,11 +10,11 @@ HAM is a hardware application mixer for changing the volume of different  window
  - [Using config files](#using-config-files)
  - [How to build your own](#how-to-build-your-own)
     - [BOM](#bom)
-### [Features](#features)
+### [Features ](#features)
  - [Whats here](#features)
  - [Whats to come](#whats-to-come)
-### FAQ
- - [How do I know what COM port to use?](#how-do-i-know-what-com-port-to-use)
+### [FAQ ](#faq)
+ - [How do I know what COM port to use?](#how-do-i-know-what-com-port-to-use?)
 
 
 # Getting Started:
@@ -124,3 +124,9 @@ This project is still in active development, so here are some of the features we
 - Easier COM setup, device detection 
 - Buttons for possible functions like muting and config switching. 
 - Have an idea? Let us know. 
+
+# FAQ
+### Q: How do I know what COM port to use?
+You can find the COM port by going into device manager and looking under `Ports (COM & LPT)`
+
+![image](https://user-images.githubusercontent.com/58171274/208324820-ebd665f9-d3c1-421a-b480-66e81de254b6.png)
