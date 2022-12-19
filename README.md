@@ -119,10 +119,14 @@ The hard part is done! Before continuing please read [Using Config Files](#using
 
 ## What’s to come...
 This project is still in active development, so here are some of the features we plan to add in the future.
-- Linux support
-- Application grouping, to have multiple applications controlled by one knob
-- Easier COM setup, device detection 
+- Linux support.
+- Application grouping, to have multiple applications controlled by one knob.
+- Easier COM setup, device detection.
+- More cases! I mean more! lots all of the cases, every case front controls top controls you name it!
+- Support for other microcontrollers, not everyone has an Arduino Uno. How about an Arduino Micro, or ESP?
+- Not yet sure how to do this one but somewhere down the line we would like to add control over hardware devices like microphones and speakers.
 - Buttons for possible functions like muting and config switching. 
+- In the long run It would be great to have a custom PCB, to make easy to build kits possible.
 - Have an idea? Let us know. 
 
 # FAQ
