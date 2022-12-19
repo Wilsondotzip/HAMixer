@@ -34,7 +34,7 @@ Alternatively  you can use the [source code](https://github.com/Wilsondotzip/Har
 Configuration files are mainly used to bind applications to potentiometers and define the COM your HAM is connected to. A config file is needed in order to run the HAM software, so make sure your config.yaml file is in the same directory. Config files are written using YAML, here's the default config file:
 ```YAML
 comport: 4
-IDs: ## You can add up to 4 (depending on how many control knobs you have). Top to bottom -> left to right on your HAM device 
+IDs: ## You can add up to 8 (depending on how many control knobs you have). Top to bottom -> left to right on your HAM device 
 - chrome.exe
 - steam.exe
 - Discord.exe
@@ -116,6 +116,7 @@ The hard part is done! Before continuing please read [Using Config Files](#using
 - Map an applications volume to a specific control knob
 - Software that runs quietly in the background as a tray icon
 - Windows support
+- Experimental support for up to 8 inputs.
 
 ## What’s to come...
 This project is still in active development, so here are some of the features we plan to add in the future.
