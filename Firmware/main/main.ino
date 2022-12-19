@@ -2,12 +2,19 @@ int pot1 = A0;
 int pot2 = A1;
 int pot3 = A2;
 int pot4 = A3;
+int pot5 = A4;
+int pot6 = A5;
+int pot7 = A6;
+int pot8 = A7;
 
 int pot1Val = 0;
 int pot2Val = 0;
 int pot3Val = 0;
 int pot4Val = 0;
-
+int pot5Val = 0;
+int pot6Val = 0;
+int pot7Val = 0;
+int pot8Val = 0;
 
 int InitialValue = 0;
 
@@ -25,7 +32,10 @@ void setup() {
   bindToSoftware(pot2);
   bindToSoftware(pot3);
   bindToSoftware(pot4);
-
+  bindToSoftware(pot5);
+  bindToSoftware(pot6);
+  bindToSoftware(pot7);
+  bindToSoftware(pot8);
 }
 
 void loop() {
@@ -33,7 +43,10 @@ pot1Val = checkForUpdate(pot1, pot1Val, 1);
 pot2Val = checkForUpdate(pot2, pot2Val, 2);
 pot3Val = checkForUpdate(pot3, pot3Val, 3);
 pot4Val = checkForUpdate(pot4, pot4Val, 4);
-
+pot5Val = checkForUpdate(pot5, pot5Val, 5);
+pot6Val = checkForUpdate(pot6, pot6Val, 6);
+pot7Val = checkForUpdate(pot7, pot7Val, 7);
+pot8Val = checkForUpdate(pot8, pot8Val, 8);
   
 
 }
