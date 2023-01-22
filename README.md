@@ -31,22 +31,22 @@ If you have windows you're all set nothing else is needed! Go grab the [compiled
 Alternatively  you can use the [source code](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Software/Source) instead. 
 
 ## Using config files
-Configuration files are mainly used to bind applications to potentiometers and define the COM your HAM is connected to. A config file is needed in order to run the HAM software, so make sure your config.yaml file is in the same directory. Config files are written using YAML, here's the default config file:
+Configuration files are mainly used to bind applications to potentiometers and define the COM port your HAM is connected to. A config file is needed in order to run the HAM software, so make sure your config.yaml file is in the same directory. Config files are written using YAML, here's an example config file.
 ```YAML
-comport: 4
-IDs: ## You can add up to 8 (depending on how many control knobs you have). Top to bottom -> left to right on your HAM device 
-- chrome.exe
-- steam.exe
-- Discord.exe
-- vlc.exe
-
-baudrate: 9600 ## Must match firmware baudrate. 
-
+comport: COM4
+baudrate: 9600
 bytesize: 8
-parity:  N
+parity: N
 stopbits: 1
 
+Mappings:
+    ID1:
+        Applications: Discord.exe;plex.exe 
+    ID2:
+        Applications: 
+
 ```
+You can add as many IDs as you want In any order. Just make sure to seperate grouped applications by using a `;` 
 1. `comport:` Defines the COM port to receive  on, number only. Please see [FAQ: How do I know what COM port to use?](#how-do-i-know-what-com-port-to-use)
 2. `IDs:` A list that defines which application is bound to which potentiometer. Top to bottom -> left to right on your HAM device. Please note that this option is case sensitive
 3. `baudrate:` Defines the baudrate (communication speed) of the software, this **MUST** match the firmware. The default is 9600
