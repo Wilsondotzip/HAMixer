@@ -56,16 +56,15 @@ def main():
         except:
             print('speed error part 2')
             return main()
-        if e[1]>len(ids):
-            return main()
-        if e[0]!=idv[e[1]]:
-            #print(e[0],idv[e[1]],'----------')#debug
-            idv[e[1]]=e[0]
-            sessions = AudioUtilities.GetAllSessions()
-            for session in sessions:
-                volume = session._ctl.QueryInterface(ISimpleAudioVolume)
-                for a in ids[e[1]]:
-                    if session.Process and session.Process.name() == ids[e[1]]:
-                        #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
-                        volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
+        if e[1]<=len(ids):
+            if e[0]!=idv[e[1]]:
+                #print(e[0],idv[e[1]],'----------')#debug
+                idv[e[1]]=e[0]
+                sessions = AudioUtilities.GetAllSessions()
+                for session in sessions:
+                    volume = session._ctl.QueryInterface(ISimpleAudioVolume)
+                    for a in ids[e[1]]:
+                        if session.Process and session.Process.name() == a:
+                            #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
+                            volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
 main()
