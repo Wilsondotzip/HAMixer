@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Br+mRs4hnfOjKPDfRuznaxnjUdJkVYp3/G7t1Nys2ZzgvdqrhhLZ+UVCNr4jcLXJmGSZmbVYEaHkfUGSTgvDIw==",
+  "dgSpecHash": "uM/E5iwhybuDJeh3QAAjTpQn8hxBuG7fdeAlxxxfl+b+7VVj2Zat4wxNLdhAGcMnirhNa8aoRhJJ8rHwlaUciQ==",
   "success": true,
-  "projectFilePath": "\\\\SPIKE\\media\\Work\\Long Projects\\HAM-Windows\\HAM-Windows.csproj",
+  "projectFilePath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\HAM-Windows.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wspal\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
     "C:\\Users\\wspal\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",

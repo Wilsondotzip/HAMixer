@@ -107,9 +107,9 @@ public partial class Form1 : Form
     private void BackendControl(int code)
     {
         if (code == 1)
-            backEndScript = Process.Start(@"HAM.exe");
+            backEndScript = Process.Start(@"HAM-Headless.exe");
         else
-            foreach (var process in Process.GetProcessesByName("HAM"))
+            foreach (var process in Process.GetProcessesByName("HAM-Headless"))
                 process.Kill();
     }
 

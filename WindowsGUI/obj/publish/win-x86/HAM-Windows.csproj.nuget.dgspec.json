@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "\\\\SPIKE\\media\\Work\\Long Projects\\HAM-Windows\\HAM-Windows.csproj": {}
+    "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\HAM-Windows.csproj": {}
   },
   "projects": {
-    "\\\\SPIKE\\media\\Work\\Long Projects\\HAM-Windows\\HAM-Windows.csproj": {
+    "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\HAM-Windows.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\SPIKE\\media\\Work\\Long Projects\\HAM-Windows\\HAM-Windows.csproj",
+        "projectUniqueName": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\HAM-Windows.csproj",
         "projectName": "HAM-Windows",
-        "projectPath": "\\\\SPIKE\\media\\Work\\Long Projects\\HAM-Windows\\HAM-Windows.csproj",
+        "projectPath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\HAM-Windows.csproj",
         "packagesPath": "C:\\Users\\wspal\\.nuget\\packages\\",
-        "outputPath": "\\\\SPIKE\\media\\Work\\Long Projects\\HAM-Windows\\obj\\publish\\win-x86\\",
+        "outputPath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\obj\\publish\\win-x86\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\wspal\\AppData\\Roaming\\NuGet\\NuGet.Config",
