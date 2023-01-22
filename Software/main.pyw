@@ -1,15 +1,10 @@
 from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
 import serial
 import yaml
-import pystray
-import PIL.Image
 import sys
 import os
-#import threading
-from tkinter import *
-from tkinter import ttk
 import serial.tools.list_ports
-maxid=20
+#not nessessary
 defaultcom=''
 for port in serial.tools.list_ports.comports():
     if 'arduino' in port.description.lower():
