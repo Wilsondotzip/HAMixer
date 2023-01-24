@@ -1,0 +1,12 @@
+
+comport: COM4
+baudrate: 9600
+bytesize: 8
+parity: N
+stopbits: 2
+
+Mappings:
+    ID1:
+        Applications: 
+
+

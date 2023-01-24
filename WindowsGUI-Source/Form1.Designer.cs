@@ -58,7 +58,7 @@
             // 
             this.hamIcon.ContextMenuStrip = this.contextMenuStrip1;
             this.hamIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("hamIcon.Icon")));
-            this.hamIcon.Text = "notifyIcon1";
+            this.hamIcon.Text = "HAM";
             this.hamIcon.Visible = true;
             this.hamIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
@@ -95,91 +95,127 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.AllowDrop = true;
+            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(191, 12);
+            this.comboBox1.Location = new System.Drawing.Point(190, 19);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.Size = new System.Drawing.Size(122, 24);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
             // 
             // textBoxBaudrate
             // 
-            this.textBoxBaudrate.Location = new System.Drawing.Point(191, 63);
+            this.textBoxBaudrate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.textBoxBaudrate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxBaudrate.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxBaudrate.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.textBoxBaudrate.Location = new System.Drawing.Point(190, 68);
             this.textBoxBaudrate.Name = "textBoxBaudrate";
-            this.textBoxBaudrate.Size = new System.Drawing.Size(121, 23);
+            this.textBoxBaudrate.Size = new System.Drawing.Size(120, 16);
             this.textBoxBaudrate.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 15);
+            this.label1.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(62, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 15);
+            this.label1.Size = new System.Drawing.Size(79, 19);
             this.label1.TabIndex = 5;
-            this.label1.Text = "COM Port Selection";
+            this.label1.Text = "COM Port:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 66);
+            this.label2.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label2.Location = new System.Drawing.Point(60, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 15);
+            this.label2.Size = new System.Drawing.Size(80, 19);
             this.label2.TabIndex = 6;
             this.label2.Text = "Baudrate:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label3.Location = new System.Drawing.Point(60, 95);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.Size = new System.Drawing.Size(74, 19);
             this.label3.TabIndex = 7;
             this.label3.Text = "Bytesize:";
             // 
             // textBoxBytesize
             // 
-            this.textBoxBytesize.Location = new System.Drawing.Point(191, 92);
+            this.textBoxBytesize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.textBoxBytesize.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxBytesize.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxBytesize.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.textBoxBytesize.Location = new System.Drawing.Point(190, 96);
             this.textBoxBytesize.Name = "textBoxBytesize";
-            this.textBoxBytesize.Size = new System.Drawing.Size(121, 23);
+            this.textBoxBytesize.Size = new System.Drawing.Size(120, 16);
             this.textBoxBytesize.TabIndex = 8;
             // 
             // textBoxParity
             // 
-            this.textBoxParity.Location = new System.Drawing.Point(191, 121);
+            this.textBoxParity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.textBoxParity.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxParity.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxParity.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.textBoxParity.Location = new System.Drawing.Point(190, 125);
             this.textBoxParity.Name = "textBoxParity";
-            this.textBoxParity.Size = new System.Drawing.Size(121, 23);
+            this.textBoxParity.Size = new System.Drawing.Size(120, 16);
             this.textBoxParity.TabIndex = 9;
             // 
             // textBoxStopbits
             // 
-            this.textBoxStopbits.Location = new System.Drawing.Point(191, 150);
+            this.textBoxStopbits.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.textBoxStopbits.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxStopbits.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxStopbits.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.textBoxStopbits.Location = new System.Drawing.Point(190, 154);
             this.textBoxStopbits.Name = "textBoxStopbits";
-            this.textBoxStopbits.Size = new System.Drawing.Size(121, 23);
+            this.textBoxStopbits.Size = new System.Drawing.Size(120, 16);
             this.textBoxStopbits.TabIndex = 10;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label4.Location = new System.Drawing.Point(60, 124);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 15);
+            this.label4.Size = new System.Drawing.Size(55, 19);
             this.label4.TabIndex = 11;
             this.label4.Text = "Parity:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label5.Location = new System.Drawing.Point(60, 153);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 15);
+            this.label5.Size = new System.Drawing.Size(72, 19);
             this.label5.TabIndex = 12;
             this.label5.Text = "Stopbits:";
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(237, 426);
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.saveButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.saveButton.Location = new System.Drawing.Point(225, 419);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(85, 30);
             this.saveButton.TabIndex = 13;
             this.saveButton.Text = "Save All";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -187,25 +223,31 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.richTextBox1.Location = new System.Drawing.Point(70, 249);
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(60, 249);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(214, 71);
+            this.richTextBox1.Size = new System.Drawing.Size(252, 82);
             this.richTextBox1.TabIndex = 14;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // idSelect
             // 
-            this.idSelect.Location = new System.Drawing.Point(70, 220);
+            this.idSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.idSelect.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.idSelect.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.idSelect.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.idSelect.Location = new System.Drawing.Point(60, 216);
             this.idSelect.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.idSelect.Name = "idSelect";
-            this.idSelect.Size = new System.Drawing.Size(120, 23);
+            this.idSelect.Size = new System.Drawing.Size(72, 23);
             this.idSelect.TabIndex = 15;
+            this.idSelect.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.idSelect.Value = new decimal(new int[] {
             1,
             0,
@@ -215,9 +257,12 @@
             // 
             // buttonSaveMap
             // 
-            this.buttonSaveMap.Location = new System.Drawing.Point(196, 220);
+            this.buttonSaveMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSaveMap.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonSaveMap.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonSaveMap.Location = new System.Drawing.Point(225, 212);
             this.buttonSaveMap.Name = "buttonSaveMap";
-            this.buttonSaveMap.Size = new System.Drawing.Size(88, 23);
+            this.buttonSaveMap.Size = new System.Drawing.Size(85, 27);
             this.buttonSaveMap.TabIndex = 16;
             this.buttonSaveMap.Text = "Save Map";
             this.buttonSaveMap.UseVisualStyleBackColor = true;
@@ -229,9 +274,13 @@
             // 
             // Form1
             // 
+            //this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - 400), (Screen.PrimaryScreen.Bounds.Height - 500));
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(28)))), ((int)(((byte)(39)))));
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(384, 461);
             this.Controls.Add(this.buttonSaveMap);
             this.Controls.Add(this.idSelect);
@@ -247,15 +296,17 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxBaudrate);
             this.Controls.Add(this.comboBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(400, 500);
             this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "HAM Controller ";
+            this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.DragLeave += new System.EventHandler(this.Form1_Resize);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.idSelect)).EndInit();

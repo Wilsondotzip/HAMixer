@@ -4,6 +4,9 @@ using System.IO.Ports;
 using System.Runtime.Serialization;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+using ReaLTaiizor.Util;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace HAM_Windows;
 
@@ -14,7 +17,7 @@ public partial class Form1 : Form
     
     static string defaultComport = "COM4";
     static string defaultBaudrate = "9600";
-    static string defaultBytesize = "16";
+    static string defaultBytesize = "8";
     static string defaultParity = "N";
     static string defaultStopbits = "2";
     
@@ -47,6 +50,7 @@ public partial class Form1 : Form
 
     public Form1()
     {
+        Location = new Point((Screen.PrimaryScreen.Bounds.Width - 350), (Screen.PrimaryScreen.Bounds.Height - 505));
         InitializeComponent();
         //do an initial port scan
         var ports = SerialPort.GetPortNames();
@@ -74,7 +78,9 @@ public partial class Form1 : Form
         //and show the system tray icon (represented by the NotifyIcon control)  
         if (WindowState != FormWindowState.Minimized) return;
         Hide();
+        WindowState = FormWindowState.Normal;
         hamIcon.Visible = true;
+
     }
 
 
@@ -84,7 +90,7 @@ public partial class Form1 : Form
         {
             Show();
             Show();
-            WindowState = FormWindowState.Normal;
+            Activate();
         }
     }
 
@@ -269,4 +275,20 @@ Mappings:
     {
         BackendControl(0);
     }
+
+    private void label1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    private void Form1_Deactivate(Object sender, EventArgs e)
+    {
+        Hide();
+
+    }
+
 }
