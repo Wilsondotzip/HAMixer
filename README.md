@@ -57,7 +57,8 @@ You can add as many IDs as you want In any order. Just make sure to seperate gro
 ## How to build your own
 ### Before building
 1. First make sure you have everything from the [BOM](#bom)
-2. If you want to use the designed case you will need a 3D printer. Otherwise you're free to make your own out of whatever  material you like! You can get the 3D print  files on [Printables](https://www.printables.com/model/342910-ham-low-profile-front-controls-case) or download them straight from the repo [here](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Models) 
+2. If you want to use the designed case you will need a 3D printer. Otherwise you're free to make your own out of whatever  material you like! You can get the 3D print  files on [Printables](https://www![HAM-Controller-Breakdown](https://user-images.githubusercontent.com/58171274/214249625-39367b9b-4ed1-4e00-ba27-8ec25c6b40d4.png)
+.printables.com/model/342910-ham-low-profile-front-controls-case) or download them straight from the repo [here](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Models) 
 3. You will need to have a working version of the [Arduino IDE](https://www.arduino.cc/en/software) this is required to flash the firmware. 
 ### Step 1: 3D Printing
 Slice and print the 3D case files. You will need one of each file however you do not need to print case.stl that is not made for 3D printing. The recommended  print settings are as follows:
@@ -98,12 +99,17 @@ An example of a possible serial monitor output:
 ```
 Before leaving the Arduino IDE take note of what COM port your device is using. This will be used when setting up the config file.
 
-### Step 5: Running the software
-The hard part is done! Before continuing please read [Using Config Files](#using-config-files) you will need to change the `COM` port to whatever your HAM device is running through. Once that’s  done, all you need to do is run the HAM.exe (in the same directory as the config.yaml file) you should see it running in the background as a tray icon in Windows. It won’t open a console or window! To verify it is indeed working go to `Settings > System > Sound > Volume mixer` and watch the application volumes change as you turn the knobs provided you have setup your config file.
+### Step 6: Running the software
+The hard part is done! HAM offers two software varients, a headless and a GUI version both for Windows. Download the package you want from the releases page or the repo's software folder. Before using the headless version please read [Using Config Files](#using-config-files). Make sure the config file, icon and HAM-Headless.exe are in the same folder then open `HAM-WindowsGUI.exe`.
+Here's a quick rundown on how to use the software.
+
+![WindowsGUI](https://github.com/Wilsondotzip/HardwareApplicationMixer/blob/experimental/Images/HAM-Controller-Breakdown.png)
+
+To verify it is indeed working go to `Settings > System > Sound > Volume mixer` and watch the application volumes change as you turn the knobs provided you have setup your config file.
 
 ## BOM
 1. Arduino Uno or compatible board x1 https://store.arduino.cc/products/arduino-uno-rev3
-2. Potentiometers x4 https://www.aliexpress.com/item/1005003390403815.html
+2. Potentiometers x4 (can be any value) https://www.aliexpress.com/item/1005003390403815.html
 3. Potentiometer Knobs x4 https://www.aliexpress.com/item/4001081531606.html
 4. USB 2.0 Cable A/B x1 https://www.aliexpress.com/item/1005003972190826.html
 5. Wire, multicore or solid core
@@ -114,17 +120,19 @@ The hard part is done! Before continuing please read [Using Config Files](#using
 
 # Features
 - Map an applications volume to a specific control knob
-- Software that runs quietly in the background as a tray icon
-- Windows support
-- Experimental support for up to 8 inputs.
+- Application grouping, to have multiple applications controlled by one knob
+- Full Windows GUI, for easy setup and application mapping!
+- When minimized, software which runs quietly in the background as a tray icon
+- Easy to use config files
+- A headless software varient
+- Full Windows support
 
 ## What’s to come...
 This project is still in active development, so here are some of the features we plan to add in the future.
-- Linux support.
-- Application grouping, to have multiple applications controlled by one knob.
-- Easier COM setup, device detection.
+- Linux support. Its getting there... 
 - More cases! I mean more! All of the cases, every case. Front controls top controls you name it!
-- Support for other microcontrollers, not everyone has an Arduino Uno. How about an Arduino Micro, or ESP?
+- A pretty UI that has easy to customize colours.
+- Verified firmware support for other microcontrollers, not everyone has an Arduino Uno. How about an Arduino Micro, or ESP?
 - Not yet sure how to do this one but somewhere down the line we would like to add control over hardware devices like microphones and speakers.
 - Buttons for possible functions like muting and config switching. 
 - In the long run It would be great to have a custom PCB, to make easy to build kits possible.
@@ -135,3 +143,8 @@ This project is still in active development, so here are some of the features we
 You can find the COM port by going into device manager and looking under `Ports (COM & LPT)`
 
 ![image](https://user-images.githubusercontent.com/58171274/208324820-ebd665f9-d3c1-421a-b480-66e81de254b6.png)
+### Q: Does the potentiometers value make a difference?
+Nope! You can use whatever value potentiometers you want. 
+
+### Q: Can I use an ESP or a (insert other microcontroller here)?
+Maybe! Although the project isn’t verified to work on said microcontroller, there’s a good chance it will. If the microcontroller is compatible with the Arduino IDE, there's a good chance everything will work perfectly fine. However, you may also need to change the names of the analogue pins used in the firmware if your microcontroller has a different naming scheme. Test the firmware before going any further with a unverified controller. If the serial output is to the same standard as shown, there should be no issues.
