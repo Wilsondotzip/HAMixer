@@ -16,4 +16,4 @@ build_property.EnableSingleFileAnalyzer = true
 build_property.EnableTrimAnalyzer = 
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = HAM_Windows
-build_property.ProjectDir = X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI\
+build_property.ProjectDir = X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\

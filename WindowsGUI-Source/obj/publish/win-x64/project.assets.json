@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "ReaLTaiizor/3.7.9.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/ReaLTaiizor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/ReaLTaiizor.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      },
       "runtime.linux-arm.runtime.native.System.IO.Ports/7.0.0": {
         "type": "package",
         "runtimeTargets": {
@@ -155,6 +171,22 @@
       }
     },
     "net6.0-windows7.0/win-x64": {
+      "ReaLTaiizor/3.7.9.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/ReaLTaiizor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/ReaLTaiizor.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      },
       "runtime.linux-arm.runtime.native.System.IO.Ports/7.0.0": {
         "type": "package"
       },
@@ -263,6 +295,29 @@
     }
   },
   "libraries": {
+    "ReaLTaiizor/3.7.9.1": {
+      "sha512": "euICgTHCcDtsGmgGIud5SKXivdL00VpX35PXTFbHs14d9sgLrqL7bqsn/m4tRtiPoWLB2yugMoceYN2NWltnEg==",
+      "type": "package",
+      "path": "realtaiizor/3.7.9.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "Taiizor.png",
+        "lib/net48/ReaLTaiizor.dll",
+        "lib/net48/ReaLTaiizor.xml",
+        "lib/net481/ReaLTaiizor.dll",
+        "lib/net481/ReaLTaiizor.xml",
+        "lib/net6.0-windows7.0/ReaLTaiizor.dll",
+        "lib/net6.0-windows7.0/ReaLTaiizor.xml",
+        "lib/net7.0-windows7.0/ReaLTaiizor.dll",
+        "lib/net7.0-windows7.0/ReaLTaiizor.xml",
+        "lib/netcoreapp3.1/ReaLTaiizor.dll",
+        "lib/netcoreapp3.1/ReaLTaiizor.xml",
+        "realtaiizor.3.7.9.1.nupkg.sha512",
+        "realtaiizor.nuspec"
+      ]
+    },
     "runtime.linux-arm.runtime.native.System.IO.Ports/7.0.0": {
       "sha512": "CBvgRaF+M0xGLDv2Geb/0v0LEADheH8aK72GRAUJdnqnJVsQO60ki1XO8M3keEhnjm+T5NvLm41pNXAVYAPiSg==",
       "type": "package",
@@ -491,6 +546,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "ReaLTaiizor >= 3.7.9.1",
       "SharpYaml >= 2.1.0",
       "System.IO.Ports >= 7.0.0",
       "System.Management >= 7.0.0",
@@ -503,11 +559,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\HAM-Windows.csproj",
+      "projectUniqueName": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI-Source\\HAM-Windows.csproj",
       "projectName": "HAM-Windows",
-      "projectPath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\HAM-Windows.csproj",
+      "projectPath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI-Source\\HAM-Windows.csproj",
       "packagesPath": "C:\\Users\\wspal\\.nuget\\packages\\",
-      "outputPath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI\\obj\\publish\\win-x64\\",
+      "outputPath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI-Source\\obj\\publish\\win-x64\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\wspal\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -536,6 +592,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "ReaLTaiizor": {
+            "target": "Package",
+            "version": "[3.7.9.1, )"
+          },
           "SharpYaml": {
             "target": "Package",
             "version": "[2.1.0, )"
