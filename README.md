@@ -129,6 +129,7 @@ To verify it is indeed working go to `Settings > System > Sound > Volume mixer` 
 
 ## What’s to come...
 This project is still in active development, so here are some of the features we plan to add in the future.
+
 - Linux support. Its getting there... 
 - More cases! I mean more! All of the cases, every case. Front controls top controls you name it!
 - A pretty UI that has easy to customize colours.
