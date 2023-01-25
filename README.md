@@ -103,7 +103,7 @@ Before leaving the Arduino IDE take note of what COM port your device is using. 
 The hard part is done! HAM offers two software varients, a headless and a GUI version both for Windows. Download the package you want from the releases page or the repo's software folder. Before using the headless version please read [Using Config Files](#using-config-files). Make sure the config file, icon and HAM-Headless.exe are in the same folder then open `HAM-WindowsGUI.exe`.
 Here's a quick rundown on how to use the software.
 
-![WindowsGUI](https://github.com/Wilsondotzip/HardwareApplicationMixer/blob/experimental/Images/HAM-Controller-Breakdown.png)
+![WindowsGUI](https://github.com/Wilsondotzip/HardwareApplicationMixer/blob/experimental/Images/HAM-Controller-BreakdownNewGUI.png)
 
 To verify it is indeed working go to `Settings > System > Sound > Volume mixer` and watch the application volumes change as you turn the knobs provided you have setup your config file.
 
