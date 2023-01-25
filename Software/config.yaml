@@ -1,12 +1,40 @@
-comport: 4
-IDs: ## You can add up to 4 (depending on how many control knobs you have). Top to bottom -> left to right on your HAM device 
-- chrome.exe
-- steam.exe
-- Discord.exe
-- vlc.exe
 
-baudrate: 9600 ## Must match firmware baudrate. 
-
+comport: COM4 
+baudrate: 9600
 bytesize: 8
-parity:  N
+parity: N
 stopbits: 1
+
+Mappings:
+    ID1:
+        Applications: 
+    ID2:
+        Applications: 
+    ID3:
+        Applications: 
+    ID4:
+        Applications: 
+    ID5:
+        Applications: 
+    ID6:
+        Applications: 
+    ID7:
+        Applications: 
+    ID8:
+        Applications: 
+    ID9:
+        Applications: 
+    ID10:
+        Applications: 
+    ID11:
+        Applications: 
+    ID12:
+        Applications: 
+    ID13:
+        Applications: 
+    ID14:
+        Applications: 
+    ID15:
+        Applications: 
+    ID16:
+        Applications: 
