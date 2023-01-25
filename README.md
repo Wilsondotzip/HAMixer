@@ -1,6 +1,6 @@
 # HAM - *HardwareApplicationMixer*
 HAM is a hardware application mixer for changing the volume of different  windows apps on the fly. No more digging through menus. Easily adjust the volume of your music, voice chat or game to be just how you like it.  This project is still in active development you can see all the features we plan to add [here](#what's-to-come) and if you have any feedback or requests don't hesitate to log an issue.
-# Warning: You're on the experimental version, documentation will not be up to date!
+
 ![Image1](https://user-images.githubusercontent.com/58171274/208287616-4ac56eff-1d69-4b42-90ca-15974aa2479a.jpg)
 
 # Contents:
