@@ -15,7 +15,7 @@ with open('config.yaml','r',encoding='UTF-8') as e:
     config=yaml.safe_load(e)
     e.close()
 if config['comport']=='COM':
-    print(defaultcom)
+    #print(defaultcom)
     ccomport=defaultcom
 else:
     ccomport=str(config['comport'])
@@ -28,7 +28,7 @@ s.stopbits=config['stopbits']
 ie=0
 ids={}
 for a in config['Mappings']:
-    print(a)
+    #print(a)
     num=int(a.lower().strip('id'))
     appes=config['Mappings'][a]['Applications']
     if appes!=None:
@@ -39,8 +39,8 @@ idv={}
 for a in ids:
     temp={a:0}
     idv.update(temp)
-print(ids)
-print(idv)
+#print(ids)
+#print(idv)
 def main():
     global satop
     while satop!=1:
@@ -56,7 +56,7 @@ def main():
         except:
             print('speed error part 2')
             return main()
-        if e[1]<=len(ids):
+        if e[1] in idv:
             if e[0]!=idv[e[1]]:
                 #print(e[0],idv[e[1]],'----------')#debug
                 idv[e[1]]=e[0]
