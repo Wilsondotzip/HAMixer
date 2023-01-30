@@ -149,3 +149,10 @@ Nope! You can use whatever value potentiometers you want.
 
 ### Q: Can I use an ESP or a (insert other microcontroller here)?
 Maybe! Although the project isn’t verified to work on said microcontroller, there’s a good chance it will. If the microcontroller is compatible with the Arduino IDE, there's a good chance everything will work perfectly fine. However, you may also need to change the names of the analogue pins used in the firmware if your microcontroller has a different naming scheme. Test the firmware before going any further with a unverified controller. If the serial output is to the same standard as shown, there should be no issues.
+
+### Q: How do I make the HAM client run when my computer starts?
+To do this just press `Windows + R` then type `shell:startup`
+
+![image](https://user-images.githubusercontent.com/58171274/215429170-f6f05c88-8d8f-4a14-adf8-cdd0d200f2fd.png)
+
+Now add a *shortcut* to HAM-WindowsGUI.exe or HAM-Headless.exe to this folder. Provided Windows is working as it should, the HAM client should open up when ever you start your computer! 
