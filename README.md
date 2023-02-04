@@ -57,8 +57,7 @@ You can add as many IDs as you want In any order. Just make sure to seperate gro
 ## How to build your own
 ### Before building
 1. First make sure you have everything from the [BOM](#bom)
-2. If you want to use the designed case you will need a 3D printer. Otherwise you're free to make your own out of whatever  material you like! You can get the 3D print  files on [Printables](https://www![HAM-Controller-Breakdown](https://user-images.githubusercontent.com/58171274/214249625-39367b9b-4ed1-4e00-ba27-8ec25c6b40d4.png)
-.printables.com/model/342910-ham-low-profile-front-controls-case) or download them straight from the repo [here](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Models) 
+2. If you want to use the designed case you will need a 3D printer. Otherwise you're free to make your own out of whatever  material you like! You can get the 3D print  files on [Printables](https://www.printables.com/model/342910-ham-low-profile-front-controls-case) or download them straight from the repo [here](https://github.com/Wilsondotzip/HardwareApplicationMixer/tree/main/Models) 
 3. You will need to have a working version of the [Arduino IDE](https://www.arduino.cc/en/software) this is required to flash the firmware. 
 ### Step 1: 3D Printing
 Slice and print the 3D case files. You will need one of each file however you do not need to print case.stl that is not made for 3D printing. The recommended  print settings are as follows:
