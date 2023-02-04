@@ -14,9 +14,10 @@ HAM is a hardware application mixer for changing the volume of different  window
  - [Whats here](#features)
  - [Whats to come](#whats-to-come)
 ### [FAQ ](#faq)
- - [How do I know what COM port to use?](#how-do-i-know-what-com-port-to-use?)
-
-
+ - [How do I know what COM port to use?](#q-how-do-i-know-what-com-port-to-use)
+ - [Does the potentiometers value make a difference?](#q-does-the-potentiometers-value-make-a-difference)
+ - [Can I use an ESP or a (insert other microcontroller here)?](#q-can-i-use-an-esp-or-a-insert-other-microcontroller-here)
+ - [How do I make the HAM client run when my computer starts?](#q-how-do-i-make-the-ham-client-run-when-my-computer-starts)
 # Getting Started:
 
 ## How things work
