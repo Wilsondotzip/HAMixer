@@ -23,7 +23,7 @@ serialport=ccomport
 try:
     s=serial.Serial(serialport)
 except:
-    quit()
+    sys.exit()
 s.baudrate=config['baudrate']
 s.bytesize=config['bytesize']
 s.parity=config['parity']
@@ -51,7 +51,7 @@ def main():
             f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
         except:
             print('disconnect error')
-            quit()
+            sys.exit()
         print(f)
         e=f.split('@')
         try:
