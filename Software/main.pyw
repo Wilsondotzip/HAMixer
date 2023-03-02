@@ -20,7 +20,10 @@ if config['comport']=='COM':
 else:
     ccomport=str(config['comport'])
 serialport=ccomport
-s=serial.Serial(serialport)
+try:
+    s=serial.Serial(serialport)
+except:
+    sys.exit()
 s.baudrate=config['baudrate']
 s.bytesize=config['bytesize']
 s.parity=config['parity']
@@ -44,27 +47,34 @@ for a in ids:
 def main():
     global satop
     while satop!=1:
-        f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
+        try:
+            f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
+        except:
+            print('disconnect error')
+            sys.exit()
+        print(f)
         e=f.split('@')
         try:
             e[0]=int(e[0])
         except:
             print('speed error')
-            return main()
         try:
             e[1]=int(e[1])
         except:
             print('speed error part 2')
-            return main()
-        if e[1] in idv:
-            if e[0]!=idv[e[1]]:
-                #print(e[0],idv[e[1]],'----------')#debug
-                idv[e[1]]=e[0]
-                sessions = AudioUtilities.GetAllSessions()
-                for session in sessions:
-                    volume = session._ctl.QueryInterface(ISimpleAudioVolume)
-                    for a in ids[e[1]]:
-                        if session.Process and session.Process.name() == a:
-                            #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
-                            volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
-main()
+        try:
+            if e[1] in idv:
+                if e[0]!=idv[e[1]]:
+                    #print(e[0],idv[e[1]],'----------')#debug
+                    idv[e[1]]=e[0]
+                    sessions = AudioUtilities.GetAllSessions()
+                    for session in sessions:
+                        volume = session._ctl.QueryInterface(ISimpleAudioVolume)
+                        for a in ids[e[1]]:
+                            if session.Process and session.Process.name() == a:
+                                #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
+                                volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
+        except:
+            print('speed error part 3')
+  
+main()  
