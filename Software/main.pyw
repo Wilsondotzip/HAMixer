@@ -44,7 +44,12 @@ for a in ids:
 def main():
     global satop
     while satop!=1:
-        f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
+        try:
+            f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
+        except:
+            print('disconnect error')
+            exit(0)
+        print(f)
         e=f.split('@')
         try:
             e[0]=int(e[0])
