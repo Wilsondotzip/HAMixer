@@ -20,7 +20,10 @@ if config['comport']=='COM':
 else:
     ccomport=str(config['comport'])
 serialport=ccomport
-s=serial.Serial(serialport)
+try:
+    s=serial.Serial(serialport)
+except:
+    quit()
 s.baudrate=config['baudrate']
 s.bytesize=config['bytesize']
 s.parity=config['parity']
@@ -48,7 +51,7 @@ def main():
             f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
         except:
             print('disconnect error')
-            exit(0)
+            quit()
         print(f)
         e=f.split('@')
         try:
