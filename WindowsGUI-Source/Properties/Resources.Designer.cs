@@ -87,5 +87,25 @@ namespace HAM_Windows.Properties {
                 return ResourceManager.GetString("icon", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon icongreen {
+            get {
+                object obj = ResourceManager.GetObject("icongreen", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon iconred {
+            get {
+                object obj = ResourceManager.GetObject("iconred", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

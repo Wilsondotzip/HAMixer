@@ -524,7 +524,6 @@ X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\win-x64\HAM-Windows.runtimeconfig.json
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\win-x64\HAM-Windows.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\win-x64\HAM-Windows.pdb
-X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\win-x64\ReaLTaiizor.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\win-x64\SharpYaml.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\win-x64\System.CodeDom.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\win-x64\System.IO.Ports.dll
