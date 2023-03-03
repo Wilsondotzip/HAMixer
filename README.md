@@ -100,7 +100,7 @@ An example of a possible serial monitor output:
 Before leaving the Arduino IDE take note of what COM port your device is using. This will be used when setting up the config file.
 
 ### Step 6: Running the software
-The hard part is done! HAM offers two software varients, a headless and a GUI version both for Windows. Download the package you want from the releases page or the repo's software folder. Before using the headless version please read [Using Config Files](#using-config-files). Make sure the config file, icon and HAM-Headless.exe are in the same folder then open `HAM-WindowsGUI.exe`.
+The hard part is done! HAM offers two software varients, a headless and a GUI version both for Windows. Download the package you want from the releases page or the repo's software folder. Before using the headless version please read [Using Config Files](#using-config-files). Make sure the config file, icon and HAM-Headless.exe are in the same folder then open `HAM-WindowsGUI.exe`. Thanks to our new QOL update you can check the connection status by looking at the tray icon's colour. Green is good, red is bad! 
 Here's a quick rundown on how to use the software.
 
 ![WindowsGUI](https://github.com/Wilsondotzip/HardwareApplicationMixer/blob/experimental/Images/HAM-Controller-BreakdownNewGUI.png)
@@ -119,18 +119,21 @@ To verify it is indeed working go to `Settings > System > Sound > Volume mixer` 
 9. Optional heatshrink diameter depends on the wire you use, https://www.aliexpress.com/item/4000272238274.html
 
 # Features
+
 - Map an applications volume to a specific control knob
 - Application grouping, to have multiple applications controlled by one knob
 - Full Windows GUI, for easy setup and application mapping!
 - When minimized, software which runs quietly in the background as a tray icon
 - Easy to use config files
+- Auto reconnect
+- System notifications when things go wrong
 - A headless software varient
 - Full Windows support
 
 ## What’s to come...
 This project is still in active development, so here are some of the features we plan to add in the future.
 
-- Linux support. Its getting there... 
+- Linux support. Its getting there... (We will need to remake the backend script from the ground up for this.)
 - More cases! I mean more! All of the cases, every case. Front controls top controls you name it!
 - A pretty UI that has easy to customize colours.
 - Verified firmware support for other microcontrollers, not everyone has an Arduino Uno. How about an Arduino Micro, or ESP?
