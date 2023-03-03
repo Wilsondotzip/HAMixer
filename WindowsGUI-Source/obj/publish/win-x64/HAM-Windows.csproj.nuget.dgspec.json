@@ -40,10 +40,6 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
-            "ReaLTaiizor": {
-              "target": "Package",
-              "version": "[3.7.9.1, )"
-            },
             "SharpYaml": {
               "target": "Package",
               "version": "[2.1.0, )"

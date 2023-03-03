@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "jiYL7OQihRSx9nkVGYI9vaakF9xHqh5IEqG1KBp8j4QdHPOCHGCaOCQp6G9J3N6Sa9g/1dQLZhDGZUVQQR/VgA==",
+  "dgSpecHash": "td5M9D6s1Xzm3ykqlCICe4onIC/IoJp1G0L5cvyX9WsZYukmgF/siCw4SfmMUT7f5vVpkRl+vWFMcZ5IrHP7ng==",
   "success": true,
   "projectFilePath": "X:\\Work\\Long Projects\\HardwareApplicationMixer\\WindowsGUI-Source\\HAM-Windows.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\wspal\\.nuget\\packages\\realtaiizor\\3.7.9.1\\realtaiizor.3.7.9.1.nupkg.sha512",
     "C:\\Users\\wspal\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
     "C:\\Users\\wspal\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
     "C:\\Users\\wspal\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",

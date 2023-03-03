@@ -67,7 +67,6 @@ X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\HAM-Windows.runtimeconfig.json
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\HAM-Windows.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\HAM-Windows.pdb
-X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\ReaLTaiizor.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\SharpYaml.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\System.CodeDom.dll
 X:\Work\Long Projects\HardwareApplicationMixer\WindowsGUI-Source\bin\Release\net6.0-windows\System.IO.Ports.dll

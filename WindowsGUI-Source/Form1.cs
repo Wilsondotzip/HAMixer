@@ -4,10 +4,9 @@ using System.IO.Ports;
 using System.Runtime.Serialization;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using ReaLTaiizor.Util;
 using System.Drawing;
 using System.Windows.Forms;
-
+using HAM_Windows.Properties;
 namespace HAM_Windows;
 
 public partial class Form1 : Form
@@ -50,10 +49,15 @@ public partial class Form1 : Form
 
     public Form1()
     {
+
         Location = new Point((Screen.PrimaryScreen.Bounds.Width - 350), (Screen.PrimaryScreen.Bounds.Height - 505));
         InitializeComponent();
+        this.hamIcon.Icon = Properties.Resources.iconred;
+
+        Thread wd = new Thread(new ThreadStart(watchDog)); // Ant said this is dumb
+        wd.Start(); // Ant said this is dumb 
         //do an initial port scan
-        var ports = SerialPort.GetPortNames();
+        //var ports = SerialPort.GetPortNames();
         //backEndScript = Process.Start(@"HAM.exe");
     }
 
@@ -94,7 +98,35 @@ public partial class Form1 : Form
         }
     }
 
+  
 
+    private async void watchDog()
+    {
+        int i = 0;
+        int d = 0;
+        while (true) 
+        {
+            await Task.Delay(3000);
+
+            Process[] processes = Process.GetProcessesByName("HAM-Headless");
+            if (processes.Length == 0)
+            {
+                this.hamIcon.Icon = Properties.Resources.iconred;
+                if (i == 0) 
+                { hamIcon.ShowBalloonTip(1000, "HAM Disconnected", "Oh shucks... Something's gone wrong - attempting to reconnect", ToolTipIcon.Warning); i = 1; }
+                else { BackendControl(1);}
+                
+            }
+            else
+            {
+                this.hamIcon.Icon = Properties.Resources.icongreen;
+                if (i == 1) { i = 3; hamIcon.ShowBalloonTip(1000, "HAM Connected", "Good news we're back online", ToolTipIcon.None); } else if (i == 3) { i = 0; }
+                d = 0;
+            }
+        }
+       
+
+    }
     private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
     {
     }
@@ -117,6 +149,7 @@ public partial class Form1 : Form
         else
             foreach (var process in Process.GetProcessesByName("HAM-Headless"))
                 process.Kill();
+        
     }
 
     private void comboBox1_Click(object sender, EventArgs e)
@@ -131,6 +164,8 @@ public partial class Form1 : Form
     {
         saveConfig();
         MessageBox.Show("config.yaml has been saved");
+        this.hamIcon.Icon = Properties.Resources.icongreen;
+
     }
 
     private string? tryGetID(string key)
