@@ -1,40 +1,23 @@
 
-comport: COM4 
+comport: COM4
 baudrate: 9600
 bytesize: 8
 parity: N
 stopbits: 1
 
+VM: N
+VM-Version: banana
+
 Mappings:
     ID1:
-        Applications: 
+        Applications:
+        VM: 
     ID2:
         Applications: 
+        VM: 
     ID3:
         Applications: 
+        VM: 
     ID4:
         Applications: 
-    ID5:
-        Applications: 
-    ID6:
-        Applications: 
-    ID7:
-        Applications: 
-    ID8:
-        Applications: 
-    ID9:
-        Applications: 
-    ID10:
-        Applications: 
-    ID11:
-        Applications: 
-    ID12:
-        Applications: 
-    ID13:
-        Applications: 
-    ID14:
-        Applications: 
-    ID15:
-        Applications: 
-    ID16:
-        Applications: 
+        VM: 

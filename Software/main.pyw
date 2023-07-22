@@ -5,6 +5,8 @@ import sys
 import os
 import serial.tools.list_ports
 import atexit
+import voicemeeter
+
 
 def equit(veme):
     if veme==1:
@@ -34,7 +36,6 @@ s.stopbits=config['stopbits']
 veme=0
 if config['VM']=="Y":
     kind_id=config['VM-Version']
-    import voicemeeter
     vmr=voicemeeter.remote(kind_id)
     vmr.login()
     def sgainch(srep,num):
