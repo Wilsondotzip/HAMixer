@@ -1,7 +1,7 @@
 # HAM - *HardwareApplicationMixer*
 HAM is a hardware application mixer for changing the volume of different  windows apps on the fly. No more digging through menus. Easily adjust the volume of your music, voice chat or game to be just how you like it.  This project is still in active development you can see all the features we plan to add [here](#what's-to-come) and if you have any feedback or requests don't hesitate to log an issue.
 # Warning: You're on the experimental version, documentation will not be up to date!
-![Image1](https://user-images.githubusercontent.com/58171274/208287616-4ac56eff-1d69-4b42-90ca-15974aa2479a.jpg)
+![1nonsquare](https://github.com/Wilsondotzip/HAMixer/assets/58171274/fa879564-af6d-4e54-b166-ebcadf9d83df)
 
 # Contents:
 ### [Getting Started](#getting-started)
@@ -41,18 +41,22 @@ stopbits: 1
 
 Mappings:
     ID1:
-        Applications: Discord.exe;plex.exe 
+        Applications: Discord.exe;plex.exe
+        VM: Output1 
     ID2:
-        Applications: 
+        Applications:
+        VM: Input3
 
 ```
 You can add as many IDs as you want In any order. Just make sure to seperate grouped applications by using a `;` 
 1. `comport:` Defines the COM port to receive  on, number only. Please see [FAQ: How do I know what COM port to use?](#how-do-i-know-what-com-port-to-use)
-2. `IDs:` A list that defines which application is bound to which potentiometer. Top to bottom -> left to right on your HAM device. Please note that this option is case sensitive
-3. `baudrate:` Defines the baudrate (communication speed) of the software, this **MUST** match the firmware. The default is 9600
-4. `bytesize:` Default is 8
-5. `parity:` N is for no and Y is for yes. At this point HAM does not use parity
-6. `stopbits:` Default is 1
+2. `IDs:` Each ID reperesents a different knob on your HAMixer  Top to bottom -> left to right
+3. `Applications` The list of applications bound to each knob. on your HAM device.
+4. `VM:` The list of VoiceMeeter inputs and outputs bound to each knob. *Please note that VM support is still experimental and SLOW! we know, we are working to find solutions.*
+5. `baudrate:` Defines the baudrate (communication speed) of the software, this **MUST** match the firmware. The default is 9600
+6. `bytesize:` Default is 8
+7. `parity:` N is for no and Y is for yes. At this point HAM does not use parity
+8. `stopbits:` Default is 1
 
 ## How to build your own
 ### Before building
@@ -102,8 +106,8 @@ Before leaving the Arduino IDE take note of what COM port your device is using. 
 ### Step 6: Running the software
 The hard part is done! HAM offers two software varients, a headless and a GUI version both for Windows. Download the package you want from the releases page or the repo's software folder. Before using the headless version please read [Using Config Files](#using-config-files). Make sure the config file, icon and HAM-Headless.exe are in the same folder then open `HAM-WindowsGUI.exe`.
 Here's a quick rundown on how to use the software.
+![image](https://github.com/Wilsondotzip/HAMixer/assets/58171274/c517356d-0aa8-4e8e-8a3f-c0c8be0a9296)
 
-![WindowsGUI](https://github.com/Wilsondotzip/HardwareApplicationMixer/blob/experimental/Images/HAM-Controller-BreakdownNewGUI.png)
 
 To verify it is indeed working go to `Settings > System > Sound > Volume mixer` and watch the application volumes change as you turn the knobs provided you have setup your config file.
 
@@ -119,14 +123,14 @@ To verify it is indeed working go to `Settings > System > Sound > Volume mixer` 
 9. Optional heatshrink diameter depends on the wire you use, https://www.aliexpress.com/item/4000272238274.html
 
 # Features
-- Map an applications volume to a specific control knob
+- Map an application's volume to a specific control knob
 - Application grouping, to have multiple applications controlled by one knob
 - Full Windows GUI, for easy setup and application mapping!
 - When minimized, software which runs quietly in the background as a tray icon
 - Easy to use config files
 - A headless software varient
 - Full Windows support
-
+- VoiceMeeter integration, control voicemeeter tracks with your HAMixer! *Please note this feature is still in developement and is currently SLOW but useable, we are working to solve this.*
 ## What’s to come...
 This project is still in active development, so here are some of the features we plan to add in the future.
 
