@@ -99,7 +99,6 @@ def main():
             e[0]=int(e[0])
         except:
             print('speed error')
-            return main()
         try:
             e[1]=int(e[1])
         except:
@@ -130,4 +129,3 @@ atexit.register(equit,veme=veme)
 
 if __name__ == "__main__":
     main()
-
