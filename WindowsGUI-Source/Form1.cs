@@ -7,11 +7,39 @@ using YamlDotNet.Serialization.NamingConventions;
 using System.Drawing;
 using System.Windows.Forms;
 using HAM_Windows.Properties;
+using static HAM_Windows.Form1;
+using SharpYaml.Tokens;
+using YamlDotNet.Core.Tokens;
+
 namespace HAM_Windows;
 
 public partial class Form1 : Form
 {
-    Dictionary<string, string> mapped = new();
+    
+    Dictionary<string, string> appMaps = new();
+    Dictionary<string, string> vmMap = new();
+
+    public class Mapper
+    {
+        public Dictionary<string, AppsString> Mappings { get; set; }
+
+        public Mapper()
+        {
+            // Initialize the Mappings dictionary in the constructor
+            Mappings = new Dictionary<string, AppsString>();
+        }
+
+        public class AppsString
+        {
+            public string Applications { get; set; }
+            public string VM { get; set; }
+        }
+    }
+
+
+    
+    
+    
     Process backEndScript;
     
     static string defaultComport = "COM4";
@@ -19,7 +47,13 @@ public partial class Form1 : Form
     static string defaultBytesize = "8";
     static string defaultParity = "N";
     static string defaultStopbits = "2";
-    
+    static string defaultVm = "N";
+    static string defaultVmVersion = "banana";
+    public string currentVm = defaultVm;
+    public string yamlMap = "";
+
+    public int currentID = 1;
+    public int currentView = 0; //0 is appview and 1 is vmview controls what is shown in the richtextbox
     public class Config
     {
         [YamlMember(Alias = "comport", ApplyNamingConventions = false), DefaultValue("COM4")]
@@ -37,13 +71,23 @@ public partial class Form1 : Form
         [YamlMember(Alias = "stopbits", ApplyNamingConventions = false), DefaultValue("2")]
         public string stopbits { get; set; }= defaultStopbits;
 
+        [YamlMember(Alias = "vm", ApplyNamingConventions = false), DefaultValue("N")]
+        public string vm { get; set; } = defaultVm;
+
+        [YamlMember(Alias = "vm-version", ApplyNamingConventions = false), DefaultValue("banana")]
+        public string vmversion { get; set; } = defaultVmVersion;
 
         public Dictionary<string, AppsString>? Mappings { get; set; }
 
         public class AppsString
         { 
             public string Applications { get; set; }
+            public string VM { get; set; }
+
+
         }
+
+
     }
 
 
@@ -94,12 +138,13 @@ public partial class Form1 : Form
         {
             Show();
             Show();
+            WindowState = FormWindowState.Normal;
             Activate();
         }
     }
 
   
-
+    
     private async void watchDog()
     {
         int i = 0;
@@ -144,6 +189,7 @@ public partial class Form1 : Form
 
     private void BackendControl(int code)
     {
+        
         if (code == 1)
             backEndScript = Process.Start(@"HAM-Headless.exe");
         else
@@ -163,15 +209,13 @@ public partial class Form1 : Form
     private void saveButton_Click(object sender, EventArgs e)
     {
         saveConfig();
-        MessageBox.Show("config.yaml has been saved");
+        //MessageBox.Show("config.yaml has been saved");
         this.hamIcon.Icon = Properties.Resources.icongreen;
 
     }
 
-    private string? tryGetID(string key)
-    {
-        return mapped.TryGetValue(key, out string? value) ? value : "";
-    }
+    
+    
 
     private void loadConfig(string path)
     {
@@ -181,7 +225,7 @@ public partial class Form1 : Form
             newFile.Close();
         }
         string text = File.ReadAllText(path); //read file
-        richTextBox1.Text = text; //quick debug flash to know the file is being read
+        //richTextBox1.Text = text; //quick debug flash to know the file is being read
 
         //deserialize file
         var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
@@ -192,25 +236,42 @@ public partial class Form1 : Form
             deserialized = new Config();
         }
 
-        //cleanly re map do a fresh dictionary
-        mapped.Clear();
+        Mapper myMapper = new Mapper();
+
+        //map do a dictionary in program
+        appMaps.Clear();
+        vmMap.Clear();
         if (deserialized.Mappings != null)
         {
             foreach (var (key, value) in deserialized.Mappings)
             {
-                mapped.Add(key, value.Applications);
+                appMaps.Add(key, value.Applications);
+                vmMap.Add(key, value.VM);
+
+               
+                //MessageBox.Show(deserialized.Mappings["ID1"].VM);
+                myMapper.Mappings.Add(key, new Mapper.AppsString { Applications = deserialized.Mappings[key].Applications, VM = deserialized.Mappings[key].VM}); //loads into program for updated yamlstring
+                //MessageBox.Show(myMapper.Mappings["ID1"].VM);
 
             }
+
         }
         else
         {
-            mapped.Add("ID1", "");
+            appMaps.Add("ID1", "");
+            vmMap.Add("ID1", "");
         }
+
+        yamlMap = myMapper.Mappings.Aggregate("Mappings:", (acc, kvp) =>
+           $"{acc}\n {kvp.Key}:\n  Applications: {kvp.Value.Applications}\n  VM: {kvp.Value.VM}"
+       ); // updates new yamlmap
+
+
 
         //set the text box to a current
         try
         {
-            richTextBox1.Text = mapped[$"ID{idSelect.Value}"];
+            richTextBox1.Text = appMaps[$"ID{idSelect.Value}"];
         }
         catch
         {
@@ -223,38 +284,49 @@ public partial class Form1 : Form
         textBoxBytesize.Text = deserialized.bytesize != null ? deserialized.bytesize : defaultBytesize;
         textBoxParity.Text = deserialized.parity != null ? deserialized.parity : defaultParity;
         textBoxStopbits.Text = deserialized.stopbits != null ? deserialized.stopbits : defaultStopbits;
-
+        textBoxVersion.Text = deserialized.vmversion != null ? deserialized.vmversion : defaultVmVersion;
     }
 
     private void saveConfig()
     {
         BackendControl(0);
-        SaveCurrentMap();
+
+        Mapper myMapper = new Mapper();
+
+        foreach(var key in appMaps.Keys)
+        {
+            myMapper.Mappings.Add(key, new Mapper.AppsString { Applications = appMaps[key], VM = vmMap[key] }); //loads into temp map
+
+        }
+        yamlMap = myMapper.Mappings.Aggregate("Mappings:", (acc, kvp) =>
+           $"{acc}\n {kvp.Key}:\n  Applications: {kvp.Value.Applications}\n  VM: {kvp.Value.VM}"
+       ); // updates new yamlmap
 
         var comport = comboBox1.Text;
         var baudrate = textBoxBaudrate.Text;
         var parity = textBoxParity.Text;
         var stopbits = textBoxStopbits.Text;
         var bytesize = textBoxBytesize.Text;
-
-        var mappings = mapped.Aggregate("", (current, map) => current + $"    {map.Key}:\n        Applications: {map.Value}\n");
-        
-        Console.WriteLine(mappings);
-        //config gen
+        var vmVersion = textBoxVersion.Text;
+        var vm = currentVm;
+      
         var yml = @$"
 comport: {comport}
 baudrate: {baudrate}
 bytesize: {bytesize}
 parity: {parity}
 stopbits: {stopbits}
+VM: {vm}
+VM-Version: {vmVersion}
 
-Mappings:
-{mappings}
+{yamlMap}
 
 ";
         
+
         Console.Write(yml);
         File.WriteAllText("config.yaml", yml);
+        WindowState = FormWindowState.Minimized;
 
         loadConfig(@"config.yaml");
         BackendControl(1);
@@ -262,37 +334,132 @@ Mappings:
 
     private void idSelect_ValueChanged(object sender, EventArgs e)
     {
-        richTextBox1.Text = mapped.TryGetValue($"ID{idSelect.Value}", out var stored) ? stored : "";
-    }
-
-    private void buttonSaveMap_Click(object sender, EventArgs e)
-    {
-        SaveCurrentMap();
-    }
-
-    private void SaveCurrentMap()
-    {
-        if (mapped.ContainsKey($"ID{idSelect.Value}"))
+       // richTextBox1.Text = appMaps[$"ID{idSelect.Value}"];    
+       
+        if (currentView == 0)
         {
-            if (mapped[$"ID{idSelect.Value}"] == richTextBox1.Text) return;
-            mapped.Remove($"ID{idSelect.Value}");
-            mapped.Add($"ID{idSelect.Value}", richTextBox1.Text);
+            if (appMaps.TryGetValue($"ID{idSelect.Value}", out var result))
+            {
+                richTextBox1.Text = result;
+                //MessageBox.Show("test");
+            }
+            else
+            {
+                appMaps.Add($"ID{idSelect.Value}", "");
+                richTextBox1.Text = "";
+
+            }
         }
         else
         {
-            mapped.Add($"ID{idSelect.Value}", richTextBox1.Text);
+            if (vmMap.TryGetValue($"ID{idSelect.Value}", out var result))
+            {
+                richTextBox1.Text = result;
+                //MessageBox.Show("test");
+            }
+            else
+            {
+                vmMap.Add($"ID{idSelect.Value}", "");
+                richTextBox1.Text = "";
+
+            }
         }
+        
+
     }
-    
+
+
+    private void SaveCurrentMap()
+    {
+        if (idSelect.Value == currentID)
+        {
+            if(currentView == 0) //see if apps or vm is being controlled 
+            {
+                appMaps[$"ID{idSelect.Value}"] = richTextBox1.Text;
+                if (vmMap.TryGetValue($"ID{idSelect.Value}", out var result))
+                {
+                   
+                }
+                else
+                {
+                    vmMap.Add($"ID{idSelect.Value}", "");
+                    
+                }
+
+            }
+            else
+            {
+                vmMap[$"ID{idSelect.Value}"] = richTextBox1.Text;
+                if (appMaps.TryGetValue($"ID{idSelect.Value}", out var result))
+                {
+
+                }
+                else
+                {
+                    appMaps.Add($"ID{idSelect.Value}", "");
+
+                }
+
+            }
+
+        }
+        else
+        {
+            currentID = ((int)idSelect.Value);
+
+        }
+
+
+
+        //saveConfig();
+
+    }
+    private void SaveCurrentVMMap()
+    {
+
+        string text = File.ReadAllText(@"config.yaml"); //read file 
+
+        //deserialize file
+        var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
+        Config deserialized = deserializer.Deserialize<Config>(text);
+        Mapper myMapper = new Mapper();
+
+
+        if (deserialized.Mappings != null)
+        {
+            foreach (var (key, value) in deserialized.Mappings)
+            {
+
+                myMapper.Mappings.Add(key, new Mapper.AppsString { Applications = deserialized.Mappings[key].Applications, VM = deserialized.Mappings[key].VM }); //loads into program
+
+            }
+
+        }
+
+        if (myMapper.Mappings.ContainsKey($"ID{idSelect.Value}"))
+        {
+            myMapper.Mappings[$"ID{idSelect.Value}"].Applications = richTextBox1.Text;
+
+        }
+        else
+        {
+            myMapper.Mappings.Add($"ID{idSelect.Value}", new Mapper.AppsString { Applications = "", VM = richTextBox1.Text });
+        }
+        yamlMap = myMapper.Mappings.Aggregate("", (acc, kvp) =>
+           $"{acc}\n{kvp.Key}:\n  Applications: {kvp.Value.Applications}\n  VM: {kvp.Value.VM}"
+       );
+    }
+
     private void richTextBox1_TextChanged(object sender, EventArgs e)
     {
+        SaveCurrentMap();
     }
 
     private void toolStripMenuItem1_Click(object sender, EventArgs e)
     {
         Process.Start(new ProcessStartInfo
         {
-            FileName = "https://github.com/Wilsondotzip/HardwareApplicationMixer",
+            FileName = "https://github.com/Wilsondotzip/HAMixer",
             UseShellExecute = true
         });
     }
@@ -326,4 +493,48 @@ Mappings:
 
     }
 
+    private void VMbutton_Click(object sender, EventArgs e)
+    {
+        // read global counter, set bool counter inverse, then change colour of button and text
+        currentVm = (currentVm == "Y") ? "N" : "Y";
+        string Text = (currentVm == "Y") ?  "Enabled" : "Disabled";
+        VMbutton.Text = Text;
+    }
+
+    private void buttonAppSelect_Click(object sender, EventArgs e)
+    {
+        currentView = 0;
+
+        if (appMaps.TryGetValue($"ID{idSelect.Value}", out var result))
+        {
+            richTextBox1.Text = result;
+        }
+        else
+        {
+            appMaps.Add($"ID{idSelect.Value}", "");
+            richTextBox1.Text = "";
+
+        }
+        buttonVMSelect.BackColor = Color.FromArgb(27, 28, 39);
+        buttonAppSelect.BackColor = Color.FromArgb(40, 41, 61);
+    }
+
+    private void buttonVMSelect_Click(object sender, EventArgs e)
+    {
+        currentView = 1;
+
+        if (vmMap.TryGetValue($"ID{idSelect.Value}", out var result))
+        {
+            richTextBox1.Text = result;
+        }
+        else
+        {
+            vmMap.Add($"ID{idSelect.Value}", "");
+            richTextBox1.Text = "";
+
+        }
+        currentView = 1;
+        buttonVMSelect.BackColor = Color.FromArgb(40, 41, 61);
+        buttonAppSelect.BackColor = Color.FromArgb(27, 28, 39);
+    }
 }

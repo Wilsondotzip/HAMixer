@@ -48,8 +48,14 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.idSelect = new System.Windows.Forms.NumericUpDown();
-            this.buttonSaveMap = new System.Windows.Forms.Button();
             this.openConfigDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.VMbutton = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxVersion = new System.Windows.Forms.TextBox();
+            this.buttonAppSelect = new System.Windows.Forms.Button();
+            this.buttonVMSelect = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.idSelect)).BeginInit();
             this.SuspendLayout();
@@ -227,7 +233,7 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.richTextBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.richTextBox1.Location = new System.Drawing.Point(60, 249);
+            this.richTextBox1.Location = new System.Drawing.Point(58, 320);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(252, 82);
             this.richTextBox1.TabIndex = 14;
@@ -240,7 +246,7 @@
             this.idSelect.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.idSelect.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.idSelect.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.idSelect.Location = new System.Drawing.Point(60, 216);
+            this.idSelect.Location = new System.Drawing.Point(238, 290);
             this.idSelect.Minimum = new decimal(new int[] {
             1,
             0,
@@ -257,22 +263,95 @@
             0});
             this.idSelect.ValueChanged += new System.EventHandler(this.idSelect_ValueChanged);
             // 
-            // buttonSaveMap
-            // 
-            this.buttonSaveMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSaveMap.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveMap.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonSaveMap.Location = new System.Drawing.Point(225, 212);
-            this.buttonSaveMap.Name = "buttonSaveMap";
-            this.buttonSaveMap.Size = new System.Drawing.Size(85, 27);
-            this.buttonSaveMap.TabIndex = 16;
-            this.buttonSaveMap.Text = "Save Map";
-            this.buttonSaveMap.UseVisualStyleBackColor = true;
-            this.buttonSaveMap.Click += new System.EventHandler(this.buttonSaveMap_Click);
-            // 
             // openConfigDialog
             // 
             this.openConfigDialog.FileName = "openConfigDialog";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label6.Location = new System.Drawing.Point(60, 290);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 19);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Controller:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label7.Location = new System.Drawing.Point(62, 214);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(101, 19);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "VoiceMeeter:";
+            // 
+            // VMbutton
+            // 
+            this.VMbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(28)))), ((int)(((byte)(39)))));
+            this.VMbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.VMbutton.Font = new System.Drawing.Font("Bahnschrift", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.VMbutton.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.VMbutton.Location = new System.Drawing.Point(190, 212);
+            this.VMbutton.Name = "VMbutton";
+            this.VMbutton.Size = new System.Drawing.Size(120, 25);
+            this.VMbutton.TabIndex = 18;
+            this.VMbutton.Text = "Disabled";
+            this.VMbutton.UseVisualStyleBackColor = false;
+            this.VMbutton.Click += new System.EventHandler(this.VMbutton_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label8.Location = new System.Drawing.Point(62, 242);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 19);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Version:";
+            // 
+            // textBoxVersion
+            // 
+            this.textBoxVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.textBoxVersion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxVersion.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxVersion.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.textBoxVersion.Location = new System.Drawing.Point(190, 245);
+            this.textBoxVersion.Name = "textBoxVersion";
+            this.textBoxVersion.Size = new System.Drawing.Size(122, 16);
+            this.textBoxVersion.TabIndex = 20;
+            // 
+            // buttonAppSelect
+            // 
+            this.buttonAppSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(41)))), ((int)(((byte)(61)))));
+            this.buttonAppSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonAppSelect.Font = new System.Drawing.Font("Bahnschrift", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAppSelect.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonAppSelect.Location = new System.Drawing.Point(-2, 320);
+            this.buttonAppSelect.Name = "buttonAppSelect";
+            this.buttonAppSelect.Size = new System.Drawing.Size(54, 25);
+            this.buttonAppSelect.TabIndex = 21;
+            this.buttonAppSelect.Text = "Apps";
+            this.buttonAppSelect.UseVisualStyleBackColor = false;
+            this.buttonAppSelect.Click += new System.EventHandler(this.buttonAppSelect_Click);
+            // 
+            // buttonVMSelect
+            // 
+            this.buttonVMSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(28)))), ((int)(((byte)(39)))));
+            this.buttonVMSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonVMSelect.Font = new System.Drawing.Font("Bahnschrift", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonVMSelect.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonVMSelect.Location = new System.Drawing.Point(-2, 351);
+            this.buttonVMSelect.Name = "buttonVMSelect";
+            this.buttonVMSelect.Size = new System.Drawing.Size(54, 25);
+            this.buttonVMSelect.TabIndex = 22;
+            this.buttonVMSelect.Text = "VM";
+            this.buttonVMSelect.UseVisualStyleBackColor = false;
+            this.buttonVMSelect.Click += new System.EventHandler(this.buttonVMSelect_Click);
             // 
             // Form1
             // 
@@ -282,7 +361,13 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(28)))), ((int)(((byte)(39)))));
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(384, 461);
-            this.Controls.Add(this.buttonSaveMap);
+            this.Controls.Add(this.buttonVMSelect);
+            this.Controls.Add(this.buttonAppSelect);
+            this.Controls.Add(this.textBoxVersion);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.VMbutton);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.idSelect);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.saveButton);
@@ -333,9 +418,15 @@
         private Button saveButton;
         private RichTextBox richTextBox1;
         private NumericUpDown idSelect;
-        private Button buttonSaveMap;
         private ToolStripMenuItem loadConfigFileToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem1;
         private OpenFileDialog openConfigDialog;
+        private Label label6;
+        private Label label7;
+        private Button VMbutton;
+        private Label label8;
+        private TextBox textBoxVersion;
+        private Button buttonAppSelect;
+        private Button buttonVMSelect;
     }
 }
