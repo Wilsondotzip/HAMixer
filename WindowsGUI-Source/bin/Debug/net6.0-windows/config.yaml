@@ -1,14 +1,23 @@
 
-comport: COM4
+comport: COM9
 baudrate: 9600
 bytesize: 8
 parity: N
 stopbits: 1
 VM: N
-VM-Version: banana
+VM-Version: potato
 
 Mappings:
  ID1:
   Applications: 
+  VM: Wow
+ ID2:
+  Applications: csgo.exe;javaw.exe;RocketLeague.exe;Cyberpunk2077.exe
+  VM: 
+ ID3:
+  Applications: Plexamp.exe;Spotify.exe
+  VM: 
+ ID4:
+  Applications: chrome.exe;Plex.exe;firefox.exe;vlc.exe
   VM: 
 

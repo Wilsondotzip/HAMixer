@@ -387,6 +387,7 @@
             this.MaximumSize = new System.Drawing.Size(400, 500);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+
             this.Text = "HAM Controller ";
             this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

@@ -5,7 +5,6 @@ import sys
 import os
 import serial.tools.list_ports
 import atexit
-import voicemeeter
 
 
 def equit(veme):
@@ -34,7 +33,11 @@ s.bytesize=config['bytesize']
 s.parity=config['parity']
 s.stopbits=config['stopbits']
 veme=0
-if config['VM']=="Y":
+VME=False
+if config['VM']=='Y':
+    VME=True
+if VME:
+    import voicemeeter
     kind_id=config['VM-Version']
     vmr=voicemeeter.remote(kind_id)
     vmr.login()
@@ -47,7 +50,7 @@ if config['VM']=="Y":
             fnum=(num-0.5)*24
         else: fnum=0
         #print(srep,num,fnum)
-        vmr.inputs[srep].gain=fnum
+        vmr.inputs[srep].gain=int(fnum)
     def bgainch(srep,num):
         srep=int(srep)
         num=int(num)/100
@@ -57,7 +60,7 @@ if config['VM']=="Y":
             fnum=(num-0.5)*24
         else: fnum=0
         #print(srep,num,fnum)
-        vmr.outputs[srep].gain=fnum
+        vmr.outputs[srep].gain=int(fnum)
     veme=1
 ie=0
 ids={}
@@ -67,10 +70,11 @@ for a in config['Mappings']:
     appes=fcen['Applications']
     lt={}
     lele=[]
-    if 'VM' in fcen:
-        if fcen['VM']!=None:
-            lele.append(fcen['VM'])
-        lt.update({'vm':lele})
+    if VME:
+        if 'VM' in fcen:
+            if fcen['VM']!=None:
+                lele.append(fcen['VM'])
+            lt.update({'vm':lele})
     if appes!=None:
         appes=appes.split(';')
         lte=[]
@@ -87,6 +91,7 @@ for a in ids:
 print(ids)
 #print(idv)
 def main():
+    called=0
     while True:
         try:
             f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
@@ -119,12 +124,19 @@ def main():
                                     volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
                     if 'vm' in ids[e[1]]:
                         for a in ids[e[1]]['vm']:
-                            if a.lower().startswith('input'):
-                                num=a.strip('Input')
-                                sgainch(num,idv[e[1]])
-                            if a.lower().startswith('output'):
-                                num=a.strip('Output')
-                                bgainch(num,idv[e[1]])
+                            if called==0:
+                                if a.lower().startswith('input'):
+                                    num=a.strip('Input')
+                                    sgainch(num,idv[e[1]])
+                                if a.lower().startswith('output'):
+                                    num=a.strip('Output')
+                                    bgainch(num,idv[e[1]])
+                                called=called+1
+                            else:
+                                called=called+1
+                                if called>=5:
+                                    called=0
+                                    
 atexit.register(equit,veme=veme)                                
 
 if __name__ == "__main__":
