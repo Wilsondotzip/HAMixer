@@ -71,10 +71,10 @@ public partial class Form1 : Form
         [YamlMember(Alias = "stopbits", ApplyNamingConventions = false), DefaultValue("2")]
         public string stopbits { get; set; }= defaultStopbits;
 
-        [YamlMember(Alias = "vm", ApplyNamingConventions = false), DefaultValue("N")]
+        [YamlMember(Alias = "VM", ApplyNamingConventions = false), DefaultValue("N")]
         public string vm { get; set; } = defaultVm;
 
-        [YamlMember(Alias = "vm-version", ApplyNamingConventions = false), DefaultValue("banana")]
+        [YamlMember(Alias = "VM-Version", ApplyNamingConventions = false), DefaultValue("banana")]
         public string vmversion { get; set; } = defaultVmVersion;
 
         public Dictionary<string, AppsString>? Mappings { get; set; }
@@ -170,7 +170,7 @@ public partial class Form1 : Form
             else
             {
                 this.hamIcon.Icon = Properties.Resources.icongreen;
-                if (i == 1) { i = 3; hamIcon.ShowBalloonTip(1000, "HAM Connected", "Good news we're back online", ToolTipIcon.None); } else if (i == 3) { i = 0; }
+                if (i == 1) { i = 3; hamIcon.ShowBalloonTip(1000, "COM Port Connected", "We're connected to a COM port, if its not working check you have the right COM port", ToolTipIcon.None); } else if (i == 3) { i = 0; }
                 d = 0;
             }
         }
@@ -276,7 +276,16 @@ public partial class Form1 : Form
         //set the text box to a current
         try
         {
-            richTextBox1.Text = appMaps[$"ID{idSelect.Value}"];
+            if(currentView == 0)
+            {
+                richTextBox1.Text = appMaps[$"ID{idSelect.Value}"];
+
+            }
+            else
+            {
+                richTextBox1.Text = vmMap[$"ID{idSelect.Value}"];
+
+            }
         }
         catch
         {
@@ -290,6 +299,8 @@ public partial class Form1 : Form
         textBoxParity.Text = deserialized.parity != null ? deserialized.parity : defaultParity;
         textBoxStopbits.Text = deserialized.stopbits != null ? deserialized.stopbits : defaultStopbits;
         textBoxVersion.Text = deserialized.vmversion != null ? deserialized.vmversion : defaultVmVersion;
+        VMbutton.Text = (deserialized.vm == "Y") ? "Enabled" : "Disabled";
+       
     }
 
     private void saveConfig()
@@ -298,7 +309,7 @@ public partial class Form1 : Form
 
         Mapper myMapper = new Mapper();
 
-        foreach(var key in appMaps.Keys)
+        foreach(var key in appMaps.Keys) //needs to use try get key
         {
             myMapper.Mappings.Add(key, new Mapper.AppsString { Applications = appMaps[key], VM = vmMap[key] }); //loads into temp map
 
@@ -306,14 +317,14 @@ public partial class Form1 : Form
         yamlMap = myMapper.Mappings.Aggregate("Mappings:", (acc, kvp) =>
            $"{acc}\n {kvp.Key}:\n  Applications: {kvp.Value.Applications}\n  VM: {kvp.Value.VM}"
        ); // updates new yamlmap
-
+        //MessageBox.Show(yamlMap);
         var comport = comboBox1.Text;
         var baudrate = textBoxBaudrate.Text;
         var parity = textBoxParity.Text;
         var stopbits = textBoxStopbits.Text;
         var bytesize = textBoxBytesize.Text;
         var vmVersion = textBoxVersion.Text;
-        var vm = currentVm;
+        var vm = (VMbutton.Text == "Enabled") ? "Y" : "N"; ;
       
         var yml = @$"
 comport: {comport}
@@ -339,7 +350,6 @@ VM-Version: {vmVersion}
 
     private void idSelect_ValueChanged(object sender, EventArgs e)
     {
-       // richTextBox1.Text = appMaps[$"ID{idSelect.Value}"];    
        
         if (currentView == 0)
         {
@@ -350,7 +360,9 @@ VM-Version: {vmVersion}
             }
             else
             {
-                appMaps.Add($"ID{idSelect.Value}", "");
+
+                appMaps.TryAdd($"ID{idSelect.Value}", "");
+                vmMap.TryAdd($"ID{idSelect.Value}", "");
                 richTextBox1.Text = "";
 
             }
@@ -364,7 +376,9 @@ VM-Version: {vmVersion}
             }
             else
             {
-                vmMap.Add($"ID{idSelect.Value}", "");
+
+                appMaps.TryAdd($"ID{idSelect.Value}", "");
+                vmMap.TryAdd($"ID{idSelect.Value}", "");
                 richTextBox1.Text = "";
 
             }
@@ -499,11 +513,8 @@ VM-Version: {vmVersion}
     }
 
     private void VMbutton_Click(object sender, EventArgs e)
-    {
-        // read global counter, set bool counter inverse, then change colour of button and text
-        currentVm = (currentVm == "Y") ? "N" : "Y";
-        string Text = (currentVm == "Y") ?  "Enabled" : "Disabled";
-        VMbutton.Text = Text;
+    {       
+        VMbutton.Text = (VMbutton.Text == "Enabled") ? "Disabled" : "Enabled";        
     }
 
     private void buttonAppSelect_Click(object sender, EventArgs e)
@@ -516,7 +527,9 @@ VM-Version: {vmVersion}
         }
         else
         {
-            appMaps.Add($"ID{idSelect.Value}", "");
+            appMaps.TryAdd($"ID{idSelect.Value}", "");
+            vmMap.TryAdd($"ID{idSelect.Value}", "");
+
             richTextBox1.Text = "";
 
         }
@@ -534,11 +547,11 @@ VM-Version: {vmVersion}
         }
         else
         {
-            vmMap.Add($"ID{idSelect.Value}", "");
+            appMaps.TryAdd($"ID{idSelect.Value}", "");
+            vmMap.TryAdd($"ID{idSelect.Value}", "");
             richTextBox1.Text = "";
 
         }
-        currentView = 1;
         buttonVMSelect.BackColor = Color.FromArgb(40, 41, 61);
         buttonAppSelect.BackColor = Color.FromArgb(27, 28, 39);
     }
