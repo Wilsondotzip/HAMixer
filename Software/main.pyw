@@ -50,7 +50,7 @@ if VME:
             fnum=(num-0.5)*24
         else: fnum=0
         #print(srep,num,fnum)
-        vmr.inputs[srep].gain=int(fnum)
+        vmr.inputs[srep].gain=round(fnum,1)
     def bgainch(srep,num):
         srep=int(srep)
         num=int(num)/100
@@ -60,7 +60,7 @@ if VME:
             fnum=(num-0.5)*24
         else: fnum=0
         #print(srep,num,fnum)
-        vmr.outputs[srep].gain=int(fnum)
+        vmr.outputs[srep].gain=round(fnum,1)
     veme=1
 ie=0
 ids={}
