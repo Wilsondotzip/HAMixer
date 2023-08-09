@@ -93,13 +93,15 @@ public partial class Form1 : Form
 
     public Form1()
     {
-        
-        double refx = (Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.Bounds.Width * 0.14);
-        double refy = (Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.Bounds.Height * 0.35);
-        int x = Convert.ToInt16(refx);
-        int y = Convert.ToInt16(refy);
+        //384, 461
 
-        Location = new Point(x, y);
+
+        //double refx = (Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.Bounds.Width * 0.14);
+        //double refy = (Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.Bounds.Height * 0.35);
+       // int x = Convert.ToInt16(refx);
+        //int y = Convert.ToInt16(refy);
+
+        //Location = new Point(x, y);
         InitializeComponent();
         this.hamIcon.Icon = Properties.Resources.iconred;
 
