@@ -73,7 +73,8 @@ for a in config['Mappings']:
     if VME:
         if 'VM' in fcen:
             if fcen['VM']!=None:
-                lele.append(fcen['VM'])
+                vem=fcen['VM'].split(';')
+                lele.append(vem)
             lt.update({'vm':lele})
     if appes!=None:
         appes=appes.split(';')
@@ -88,7 +89,7 @@ idv={}
 for a in ids:
     temp={a:0}
     idv.update(temp)
-print(ids)
+#print(ids)
 #print(idv)
 def main():
     called=0
@@ -123,20 +124,21 @@ def main():
                                     #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
                                     volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
                     if 'vm' in ids[e[1]]:
-                        for a in ids[e[1]]['vm']:
+                        for fe in ids[e[1]]['vm']:
                             if called==0:
-                                if a.lower().startswith('input'):
-                                    num=a.strip('Input')
-                                    sgainch(num,idv[e[1]])
-                                if a.lower().startswith('output'):
-                                    num=a.strip('Output')
-                                    bgainch(num,idv[e[1]])
+                                for a in fe:
+                                    if a.lower().startswith('input'):
+                                        num=a.strip('Input')
+                                        sgainch(num,idv[e[1]])
+                                    if a.lower().startswith('output'):
+                                        num=a.strip('Output')
+                                        bgainch(num,idv[e[1]])
                                 called=called+1
                             else:
                                 called=called+1
                                 if called>=5:
                                     called=0
-                                    
+                                        
 atexit.register(equit,veme=veme)                                
 
 if __name__ == "__main__":
