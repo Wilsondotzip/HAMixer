@@ -60,9 +60,6 @@ if VME:
             fnum=(num-0.5)*24
         else: fnum=0
         #print(srep,num,fnum)
-<<<<<<< Updated upstream
-        vmr.outputs[srep].gain=int(fnum)
-=======
         vmr.outputs[srep].gain=round(fnum,1)
     def booltch(srep,bol):
         try:
@@ -101,7 +98,6 @@ if VME:
                     ch.mono=bol
                 elif f[1].lower()=='mute':
                     ch.mute=bol
->>>>>>> Stashed changes
     veme=1
 ie=0
 ids={}
