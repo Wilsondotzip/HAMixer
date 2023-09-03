@@ -60,7 +60,48 @@ if VME:
             fnum=(num-0.5)*24
         else: fnum=0
         #print(srep,num,fnum)
+<<<<<<< Updated upstream
         vmr.outputs[srep].gain=int(fnum)
+=======
+        vmr.outputs[srep].gain=round(fnum,1)
+    def booltch(srep,bol):
+        try:
+            e=but[srep]
+        except:
+            return
+        for a in e:
+            f=a.split('.')
+            if a.startswith('Input'):
+                ch=vmr.inputs[int(f[0].strip('Input'))]
+                if f[1]=='A1':
+                    ch.A1=bol
+                elif f[1]=='A2':
+                    ch.A2=bol
+                elif f[1]=='A3':
+                    ch.A3=bol
+                elif f[1]=='A4':
+                    ch.A4=bol
+                elif f[1]=='A5':
+                    ch.A5=bol
+                elif f[1]=='B1':
+                    ch.B1=bol
+                elif f[1]=='B2':
+                    ch.B2=bol
+                elif f[1]=='B3':
+                    ch.B3=bol
+                elif f[1].lower()=='mono':
+                    ch.mono=bol
+                elif f[1].lower()=='solo':
+                    ch.solo=bol
+                elif f[1].lower()=='mute':
+                    ch.mute=bol
+            if a.startswith('Output'):
+                ch=vmr.outputs[int(f[0].strip('Output'))]
+                if f[1].lower()=='mono':
+                    ch.mono=bol
+                elif f[1].lower()=='mute':
+                    ch.mute=bol
+>>>>>>> Stashed changes
     veme=1
 ie=0
 ids={}
@@ -84,6 +125,14 @@ for a in config['Mappings']:
     if lt!={}:
         temp={num:lt}
         ids.update(temp)
+
+but={}
+#print(config['Buttons'])
+for a in config['Buttons']:
+    if config['Buttons'][a]!=None:
+        but.update({a:config['Buttons'][a].split(';')})
+print(but)
+
 idv={}
 for a in ids:
     temp={a:0}
@@ -98,8 +147,8 @@ def main():
         except:
             print('disconnect error')
             sys.exit()
-        #print(f)
         e=f.split('@')
+<<<<<<< Updated upstream
         try:
             e[0]=int(e[0])
         except:
@@ -137,6 +186,55 @@ def main():
                                 if called>=5:
                                     called=0
                                     
+=======
+        if len(e)==2:
+            try:
+                e[0]=int(e[0])
+            except:
+                print('speed error')
+            try:
+                e[1]=int(e[1])
+            except:
+                print('speed error part 2')
+                return main()
+            if e[1] in idv:
+                if e[0]!=idv[e[1]]:
+                    #print(e[0],idv[e[1]],'----------')#debug
+                    idv[e[1]]=e[0]
+                    sessions = AudioUtilities.GetAllSessions()
+                    for session in sessions:
+                        volume = session._ctl.QueryInterface(ISimpleAudioVolume)
+                        if veme==0:
+                            if 'aps' in ids[e[1]]:
+                                for a in ids[e[1]]['aps']:
+                                    if session.Process and session.Process.name() == a:
+                                        #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
+                                        volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
+                        if 'vm' in ids[e[1]]:
+                            for fe in ids[e[1]]['vm']:
+                                if called==0:
+                                    for a in fe:
+                                        if a.lower().startswith('input'):
+                                            num=a.strip('Input')
+                                            sgainch(num,idv[e[1]])
+                                        if a.lower().startswith('output'):
+                                            num=a.strip('Output')
+                                            bgainch(num,idv[e[1]])
+                                    called=called+1
+                                else:
+                                    called=called+1
+                                    if called>=5:
+                                        called=0
+        else:
+            if veme==1:
+                if f.endswith('!='):
+                    booltch(f.strip('!='),False)
+                else:
+                    booltch(f.strip('='),True)
+                
+            
+                                        
+>>>>>>> Stashed changes
 atexit.register(equit,veme=veme)                                
 
 if __name__ == "__main__":
