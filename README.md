@@ -15,6 +15,55 @@ HAM is a hardware application mixer for changing the volume of different  window
    
 # Getting Started:
 
+## Experimental Features
+1. Button support (for VoiceMeeter controls)
+   
+Each button is given a name eg B1, B2, B3 … etc just like how IDs are used for knobs (ID1, ID2 etc). After the button’s name goes what it’s mapped to do. There are currently 4 VoiceMeeter button functions supported. Mute, solo, mono and finally toggling an output. There is no unmute, unmono or unsolo it’s all dependent on what the firmware sends out as the “buttons state”. To map buttons in the config file…
+````YAML
+comport: COM4
+baudrate: 9600
+bytesize: 8
+parity: N
+stopbits: 2
+
+VM: N
+VM-Version: banana
+
+Mappings:
+    ID1:
+        Applications: Discord.exe;plex.exe
+        VM: Output1 
+    ID2:
+        Applications:
+        VM: Input3
+
+Buttons:
+ B1: Input0.mute;Input1.mute
+ B2: 
+
+````
+
+**Input Controls**
+````
+B1: Input1.mute;Input1.solo;Input1.mono
+````
+*The number is the number of the input to affect. In this example B1 is mapped to mute, solo and mono of Input1*
+
+**Output Controls**
+````
+B1: Output1.mute;Output1.mono
+````
+*The number is the number of the Output to affect. In this example B1 is mapped to mute and mono of Output1.*
+
+**Mapping to an Output**
+````
+B1: Input1.A1 //can be A1-A5
+B2: Input1.B1 //can be B1 to B3
+````
+*The number is the number of the input to affect. In this example `B1 is mapped to A1 of input 1 and B2 is mapped to B1 of input 1.*
+
+
+
 ## How things work
 A Python script runs in the background to turn the Arduino's serial inputs into volume changes. The Arduino reads each potentiometer as a separate analogue input, this information (once mapped between [0,100]) is then sent to your computer over a COM port. The python program runs to receive the information and convert it to meaningful volume commands!  below is an image of the DIY version. 
 
