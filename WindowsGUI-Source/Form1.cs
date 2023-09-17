@@ -18,6 +18,7 @@ public partial class Form1 : Form
     
     Dictionary<string, string> appMaps = new();
     Dictionary<string, string> vmMap = new();
+    Dictionary<string, string> btMap = new();
 
     public class Mapper
     {
@@ -27,6 +28,7 @@ public partial class Form1 : Form
         {
             // Initialize the Mappings dictionary in the constructor
             Mappings = new Dictionary<string, AppsString>();
+
         }
 
         public class AppsString
@@ -34,12 +36,13 @@ public partial class Form1 : Form
             public string Applications { get; set; }
             public string VM { get; set; }
         }
+        
     }
 
 
-    
-    
-    
+
+
+
     Process backEndScript;
     
     static string defaultComport = "COM4";
@@ -51,6 +54,8 @@ public partial class Form1 : Form
     static string defaultVmVersion = "banana";
     public string currentVm = defaultVm;
     public string yamlMap = "";
+    public string yamlButtonMap = "";
+
 
     public int currentID = 1;
     public int currentView = 0; //0 is appview and 1 is vmview controls what is shown in the richtextbox
@@ -87,19 +92,23 @@ public partial class Form1 : Form
 
         }
 
+        public Dictionary<string, string>? Buttons { get; set; }
+
+     
 
     }
 
 
     public Form1()
     {
-        
-        double refx = (Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.Bounds.Width * 0.14);
-        double refy = (Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.Bounds.Height * 0.35);
-        int x = Convert.ToInt16(refx);
-        int y = Convert.ToInt16(refy);
 
-        Location = new Point(x, y);
+        //double refx = (Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.Bounds.Width * 0.14);
+        //double refy = (Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.Bounds.Height * 0.35);
+        //int x = Convert.ToInt16(refx);
+        //int y = Convert.ToInt16(refy);
+
+        //Location = new Point(x, y);
+
         InitializeComponent();
         this.hamIcon.Icon = Properties.Resources.iconred;
 
@@ -267,11 +276,34 @@ public partial class Form1 : Form
             vmMap.Add("ID1", "");
         }
 
+        //map do a dictionary in program
+        btMap.Clear();
+        if (deserialized.Buttons != null)
+        {
+            foreach (var (key, value) in deserialized.Buttons)
+            {
+                btMap.Add(key, value);
+
+                //MessageBox.Show(deserialized.ButtonMappings["B1"]);
+                //MessageBox.Show(myMapper.Mappings["ID1"].VM);
+
+            }
+
+        }
+        else
+        {
+            btMap.Add("B1", "");
+
+        }
+
         yamlMap = myMapper.Mappings.Aggregate("Mappings:", (acc, kvp) =>
            $"{acc}\n {kvp.Key}:\n  Applications: {kvp.Value.Applications}\n  VM: {kvp.Value.VM}"
        ); // updates new yamlmap
 
-
+        yamlButtonMap = btMap.Aggregate("Buttons:", (acc, kvp) =>
+          $"{acc}\n {kvp.Key}: {kvp.Value}"
+      ); // updates new yamlmap
+        //MessageBox.Show(yamlButtonMap);
 
         //set the text box to a current
         try
@@ -337,6 +369,7 @@ VM-Version: {vmVersion}
 
 {yamlMap}
 
+{yamlButtonMap}
 ";
         
 
@@ -554,5 +587,10 @@ VM-Version: {vmVersion}
         }
         buttonVMSelect.BackColor = Color.FromArgb(40, 41, 61);
         buttonAppSelect.BackColor = Color.FromArgb(27, 28, 39);
+    }
+
+    private void toolStripComboBox1_Click(object sender, EventArgs e)
+    {
+
     }
 }

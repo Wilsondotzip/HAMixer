@@ -144,45 +144,6 @@ def main():
             print('disconnect error')
             sys.exit()
         e=f.split('@')
-<<<<<<< Updated upstream
-        try:
-            e[0]=int(e[0])
-        except:
-            print('speed error')
-        try:
-            e[1]=int(e[1])
-        except:
-            print('speed error part 2')
-            return main()
-        if e[1] in idv:
-            if e[0]!=idv[e[1]]:
-                #print(e[0],idv[e[1]],'----------')#debug
-                idv[e[1]]=e[0]
-                sessions = AudioUtilities.GetAllSessions()
-                for session in sessions:
-                    volume = session._ctl.QueryInterface(ISimpleAudioVolume)
-                    if veme==0:
-                        if 'aps' in ids[e[1]]:
-                            for a in ids[e[1]]['aps']:
-                                if session.Process and session.Process.name() == a:
-                                    #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
-                                    volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
-                    if 'vm' in ids[e[1]]:
-                        for a in ids[e[1]]['vm']:
-                            if called==0:
-                                if a.lower().startswith('input'):
-                                    num=a.strip('Input')
-                                    sgainch(num,idv[e[1]])
-                                if a.lower().startswith('output'):
-                                    num=a.strip('Output')
-                                    bgainch(num,idv[e[1]])
-                                called=called+1
-                            else:
-                                called=called+1
-                                if called>=5:
-                                    called=0
-                                    
-=======
         if len(e)==2:
             try:
                 e[0]=int(e[0])
@@ -230,7 +191,6 @@ def main():
                 
             
                                         
->>>>>>> Stashed changes
 atexit.register(equit,veme=veme)                                
 
 if __name__ == "__main__":
