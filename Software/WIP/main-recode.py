@@ -1,10 +1,8 @@
-from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
+from pycaw.pycaw import AudioUtilities
 import serial
 import yaml
-import sys
 import os
 import serial.tools.list_ports
-import atexit
 import logging
 import sys
 from defaults import default_yaml
@@ -83,13 +81,14 @@ class AudioController:
 class HaMixer:
 
     def __init__(self, config):
-        self.is_open = None
+        self.config = config
         self.s = serial.Serial()
         self.s.port = config.comport
         self.s.baudrate = config.baudrate
         self.s.bytesize = config.bytesize
         self.s.parity = config.parity
         self.s.stopbits = config.stopbits
+        self.is_open = None
         if not any(self.s.port in port.name for port in serial.tools.list_ports.comports()):
             logging.error("Port %s Not Found", self.s.port)
             raise error_factory(IOError, "Port %s Not Found" % self.s.port)
@@ -111,24 +110,25 @@ class HaMixer:
         receive = str(self.s.readline()).strip(r'xb').strip(r"\\n'").lstrip(r"'")
         return receive
 
+    def ham_main(self):
+        while self.is_open:
+            receive = self.poll()
+            volume, channel = receive.split("@")
+            volume = int(volume)
+            volume = round(volume / 100, 2)
+            try:
+                for app in self.config.mappings["ID" + channel]["Applications"]:
+                    logging.debug(app)
+                    control = AudioController(app)
+                    control.set_volume(volume)
+            except TypeError:
+                pass
+
 
 def main():
     config = Config()
     ham = HaMixer(config)
-
-    # handle volume changes
-    while ham.is_open:
-        receive = ham.poll()
-        volume, channel = receive.split("@")
-        volume = int(volume)
-        volume = round(volume / 100, 2)
-        try:
-            for app in config.mappings["ID" + channel]["Applications"]:
-                logging.debug(app)
-                control = AudioController(app)
-                control.set_volume(volume)
-        except TypeError:
-            pass
+    ham.ham_main()
 
 
 if __name__ == "__main__":
