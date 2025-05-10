@@ -1,145 +1,146 @@
-from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
-import serial
-import yaml
 import sys
 import os
-import serial.tools.list_ports
+import yaml
+import serial
 import atexit
+from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
+import serial.tools.list_ports
 
+def find_arduino_port():
+    for port in serial.tools.list_ports.comports():
+        if 'arduino' in port.description.lower():
+            return port.device
+    return ''
 
-def equit(veme):
-    if veme==1:
-        vmr.logout()
+def load_config():
+    with open('config.yaml', 'r', encoding='UTF-8') as file:
+        return yaml.safe_load(file)
 
-defaultcom=''
-for port in serial.tools.list_ports.comports():
-    if 'arduino' in port.description.lower():
-        defaultcom=port.device
-with open('config.yaml','r',encoding='UTF-8') as e:
-    config=yaml.safe_load(e)
-    e.close()
-if config['comport']=='COM':
-    #print(defaultcom)
-    ccomport=defaultcom
-else:
-    ccomport=str(config['comport'])
-serialport=ccomport
-try:
-    s=serial.Serial(serialport)
-except:
-    sys.exit()
-s.baudrate=config['baudrate']
-s.bytesize=config['bytesize']
-s.parity=config['parity']
-s.stopbits=config['stopbits']
-veme=0
-VME=False
-if config['VM']=='Y':
-    VME=True
-if VME:
+def setup_serial(config, default_port):
+    port = default_port if config['comport'] == 'COM' else config['comport']
+    try:
+        ser = serial.Serial(port)
+    except serial.SerialException:
+        sys.exit("Failed to open serial port.")
+    ser.baudrate = config['baudrate']
+    ser.bytesize = config['bytesize']
+    ser.parity = config['parity']
+    ser.stopbits = config['stopbits']
+    return ser
+
+# Voicemeeter setup
+veme = 0
+vmr = None
+buttons = {}
+
+def setup_voicemeeter(config):
+    global vmr, veme
     import voicemeeter
-    kind_id=config['VM-Version']
-    vmr=voicemeeter.remote(kind_id)
+    vmr = voicemeeter.remote(config['VM-Version'])
     vmr.login()
-    def sgainch(srep,num):
-        srep=int(srep)
-        num=int(num)/100
-        if num<0.5:
-            fnum=(0.5-num)*-120
-        elif num>0.5:
-            fnum=(num-0.5)*24
-        else: fnum=0
-        #print(srep,num,fnum)
-        vmr.inputs[srep].gain=round(fnum,1)
-    def bgainch(srep,num):
-        srep=int(srep)
-        num=int(num)/100
-        if num<0.5:
-            fnum=(0.5-num)*-120
-        elif num>0.5:
-            fnum=(num-0.5)*24
-        else: fnum=0
-        #print(srep,num,fnum)
-        vmr.outputs[srep].gain=round(fnum,1)
-    veme=1
-ie=0
-ids={}
-for a in config['Mappings']:
-    num=int(a.lower().strip('id'))
-    fcen=config['Mappings'][a]
-    appes=fcen['Applications']
-    lt={}
-    lele=[]
-    if VME:
-        if 'VM' in fcen:
-            if fcen['VM']!=None:
-                vem=fcen['VM'].split(';')
-                lele.append(vem)
-            lt.update({'vm':lele})
-    if appes!=None:
-        appes=appes.split(';')
-        lte=[]
-        for a in appes:
-            lte.append(a)
-        lt.update({'aps':lte})
-    if lt!={}:
-        temp={num:lt}
-        ids.update(temp)
-idv={}
-for a in ids:
-    temp={a:0}
-    idv.update(temp)
-#print(ids)
-#print(idv)
+    veme = 1
+
+    def scalar_to_gain(value):
+        value = int(value) / 100
+        return (0.5 - value) * -120 if value < 0.5 else (value - 0.5) * 24 if value > 0.5 else 0
+
+    def set_input_gain(index, value):
+        vmr.inputs[int(index)].gain = int(scalar_to_gain(value))
+
+    def set_output_gain(index, value):
+        vmr.outputs[int(index)].gain = round(scalar_to_gain(value), 1)
+
+    def set_button_toggle(srep, state):
+        if srep not in buttons:
+            return
+        for action in buttons[srep]:
+            kind, control = action.split('.')
+            target = vmr.inputs if 'Input' in kind else vmr.outputs
+            channel = target[int(kind.strip('InputOutput'))]
+            setattr(channel, control.lower(), state)
+
+    return set_input_gain, set_output_gain, set_button_toggle
+
+# Load config and initialize
+config = load_config()
+default_com = find_arduino_port()
+serial_conn = setup_serial(config, default_com)
+
+# Setup Voicemeeter if enabled
+set_input_gain = set_output_gain = set_button_toggle = None
+if config.get('VM') == 'Y':
+    set_input_gain, set_output_gain, set_button_toggle = setup_voicemeeter(config)
+
+atexit.register(lambda: vmr.logout() if veme else None)
+
+# Map setup
+mappings = {}
+for key, val in config.get('Mappings', {}).items():
+    index = int(key.lower().strip('id'))
+    entry = {}
+
+    # Handle Applications
+    apps = val.get('Applications')
+    if apps:
+        entry['apps'] = [a.strip() for a in apps.split(';') if a.strip()]
+
+    # Handle VM (support multiple entries)
+    vm = val.get('VM')
+    if vm:
+        entry['vm'] = [v.strip() for v in vm.split(';') if v.strip()]
+
+    mappings[index] = entry
+mappings[index] = entry
+
+# Button mapping
+buttons = {
+    key: val.split(';') for key, val in config.get('Buttons', {}).items() if val
+}
+
+volumes = {k: 0 for k in mappings}
+
+def process_audio_change(index, value):
+    sessions = AudioUtilities.GetAllSessions()
+    mapping = mappings.get(index, {})
+
+    if 'apps' in mapping:
+        for session in sessions:
+            if session.Process and session.Process.name() in mapping['apps']:
+                volume = session._ctl.QueryInterface(ISimpleAudioVolume)
+                volume.SetMasterVolume(round(value / 100, 2), None)
+
+    if 'vm' in mapping:
+        for target in mapping['vm']:
+            if target.lower().startswith('input'):
+                set_input_gain(target.strip('Input'), value)
+            elif target.lower().startswith('output'):
+                set_output_gain(target.strip('Output'), value)
+
 def main():
-    called=0
+    call_counter = 0
     while True:
         try:
-            f=str(s.readline()).strip('xb').strip("\\n'").lstrip("'")
+            line = serial_conn.readline().decode().strip()
         except:
-            print('disconnect error')
-            sys.exit()
-        #print(f)
-        e=f.split('@')
-        try:
-            e[0]=int(e[0])
-        except:
-            print('speed error')
-        try:
-            e[1]=int(e[1])
-        except:
-            print('speed error part 2')
-            return main()
-        if e[1] in idv:
-            if e[0]!=idv[e[1]]:
-                #print(e[0],idv[e[1]],'----------')#debug
-                idv[e[1]]=e[0]
-                sessions = AudioUtilities.GetAllSessions()
-                for session in sessions:
-                    volume = session._ctl.QueryInterface(ISimpleAudioVolume)
-                    if veme==0:
-                        if 'aps' in ids[e[1]]:
-                            for a in ids[e[1]]['aps']:
-                                if session.Process and session.Process.name() == a:
-                                    #print("volume.GetMasterVolume(): %s" % volume.GetMasterVolume(),ids[e[1]]) debug
-                                    volume.SetMasterVolume(round(idv[e[1]]/100,2), None)
-                    if 'vm' in ids[e[1]]:
-                        for fe in ids[e[1]]['vm']:
-                            if called==0:
-                                for a in fe:
-                                    if a.lower().startswith('input'):
-                                        num=a.strip('Input')
-                                        sgainch(num,idv[e[1]])
-                                    if a.lower().startswith('output'):
-                                        num=a.strip('Output')
-                                        bgainch(num,idv[e[1]])
-                                called=called+1
-                            else:
-                                called=called+1
-                                if called>=5:
-                                    called=0
-                                        
-atexit.register(equit,veme=veme)                                
+            sys.exit("Serial disconnect error.")
+
+        if '@' in line:
+            try:
+                value_str, index_str = line.split('@')
+                value, index = int(value_str), int(index_str)
+            except ValueError:
+                print("Malformed input:", line)
+                continue
+
+            if index in volumes and value != volumes[index]:
+                volumes[index] = value
+                process_audio_change(index, value)
+
+        elif veme:
+            if line.endswith('!='):
+                set_button_toggle(line.strip('!='), False)
+            else:
+                set_button_toggle(line.strip('='), True)
 
 if __name__ == "__main__":
     main()
