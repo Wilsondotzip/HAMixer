@@ -1,7 +1,7 @@
-# HAMixer - *HardwareApplicationMixer*
-HAM is a hardware application mixer for changing the volume of different  windows apps on the fly. No more digging through menus. Easily adjust the volume of your music, voice chat or game to be just how you like it.  This project is still in active development you can see all the features we plan to add [here](#what's-to-come) and if you have any feedback or requests don't hesitate to log an issue.
+# VolumeMaster - *HardwareApplicationMixer*
+VolumeMaster is a hardware application mixer for changing the volume of different  windows apps on the fly. No more digging through menus. Easily adjust the volume of your music, voice chat or game to be just how you like it.  This project is still in active development you can see all the features we plan to add [here](#what's-to-come) and if you have any feedback or requests don't hesitate to log an issue.
 
-## Check out the Wiki For build guides and FAQ! You can buy a HAMixer [here](https://www.lootcables.com/product/hamixer/)!
+## Check out the Wiki For build guides and FAQ!
 
 ![1nonsquare](https://github.com/Wilsondotzip/HAMixer/assets/58171274/fa879564-af6d-4e54-b166-ebcadf9d83df)
 
